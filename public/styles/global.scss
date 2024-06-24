@@ -1,0 +1,282 @@
+// global.scss
+
+// Import Poppins font from Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+// Set default font-family for the body
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+// Define font size and weight variables
+$font-size-base: 16px;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// Apply font size, weight, and other styles
+html,
+body {
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: 1.5; // 150%
+    text-transform: none;
+}
+
+// Colors
+
+// .primary{
+//     color: #E04F00;
+// }
+
+.h-100{
+    height: 100vh !important;
+}
+
+.h-50{
+    height: 50vh !important;
+}
+
+.h-55{
+    height: 55vh !important;
+}
+
+.text-primary {
+    color: #E04F00 !important;
+}
+
+.text-secondy {
+    color: #F77F00 !important;
+}
+
+.text-dark-grey {
+    color: #2D2821 !important;
+}
+
+// Utility classes for font sizes
+.font-size-xs {
+    font-size: 12px;
+}
+
+.font-size-sm {
+    font-size: 14px;
+}
+
+.font-size-md {
+    font-size: 16px;
+}
+
+.font-size-lg {
+    font-size: 18px;
+}
+
+.font-size-xl {
+    font-size: 24px;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.font-18 {
+    font-size: 18px;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.font-28 {
+    font-size: 28px !important;
+}
+
+.font-40 {
+    font-size: 40px;
+}
+
+.font-52 {
+    font-size: 52px;
+}
+
+
+// Utility classes for font weights
+.font-weight-normal {
+    font-weight: $font-weight-normal;
+}
+
+.font-weight-bold {
+    font-weight: $font-weight-bold;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.fw-800 {
+    font-weight: 800;
+}
+
+.fw-900 {
+    font-weight: 900;
+}
+
+// Utility classes for text transformation
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+// Other global styles
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: $font-weight-bold;
+    line-height: 1.2;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+}
+
+input,
+textarea {
+    font-family: 'Poppins', sans-serif;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+}
+
+
+// Banner button
+
+.primary-btn.v-btn {
+    background-color: #E04F00 !important;
+    color: white !important;
+    border-radius: 8px !important;
+
+    .v-btn__content {
+        color: white !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: 0px !important;
+        text-transform: none !important;
+    }
+}
+
+.secondary-btn.v-btn {
+    background-color: #2D2821 !important;
+    color: white !important;
+    border-radius: 8px !important;
+
+    .v-btn__content {
+        color: white !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: 0px !important;
+        text-transform: none !important;
+    }
+}
+
+.catering-text-field.v-text-field {
+    height: 48px !important;
+    border: 8px !important;
+    margin: 5px 12px !important;
+}
+
+.catering-text-field.v-textarea {
+    height: 96px !important;
+    border: 8px !important;
+    margin: 5px 12px !important;
+}
+
+.catering-text-field.v-textarea .v-input__control .v-input__slot::before {
+    display: none !important;
+}
+
+.catering-text-field.v-textarea .v-input__control .v-input__slot::after {
+    display: none !important;
+}
+
+
+.catering-text-field.v-text-field .v-input__control .v-input__slot::before {
+    display: none !important;
+}
+
+.catering-text-field.v-text-field .v-input__control .v-input__slot::after {
+    display: none !important;
+}
+
+.catering-text-field.v-text-field .v-input__control .v-input__slot .v-text-field__slot>input {
+    margin-left: 12px !important;
+    font-size: 16px !important;
+    font-family: poppins !important;
+}
+
+.catering-text-field.v-text-field .v-input__control .v-input__slot .v-text-field__slot>textarea {
+    margin-left: 12px !important;
+    font-size: 16px !important;
+    font-family: poppins !important;
+}
+
+.catering-website-btn.v-btn {
+    background-color: transparent !important;
+    border: 1px solid white !important;
+    color: white !important;
+    border-radius: 17px !important;
+
+    .v-btn__content {
+        color: white !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        letter-spacing: 0px !important;
+        text-transform: none !important;
+    }
+}
