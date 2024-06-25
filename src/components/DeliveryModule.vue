@@ -199,7 +199,7 @@ export default {
 
       // Create the checkout session on your backend
       const response = await fetch(
-        "http://localhost:3000/create-checkout-session",
+        "https://backend.aladdincateringhouston.com/create-checkout-session",
         {
           method: "POST",
           headers: {

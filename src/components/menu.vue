@@ -228,7 +228,7 @@ export default {
     this.productsLoader = true
     try {
       const response = await fetch(
-        "http://localhost:3000/api/products?limit=100"
+        "https://backend.aladdincateringhouston.com/api/products?limit=100"
       );
       const products = await response.json();
       console.log("products", products);
