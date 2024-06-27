@@ -3,9 +3,9 @@
     <v-card-title class="checkout-card-title">
       <span class="mx-auto"> Your Cart ({{ cartItems.length }}) </span>
       <v-spacer></v-spacer>
-      <v-btn icon @click="closeCart">
+      <!-- <v-btn icon @click="closeCart">
         <v-icon>mdi-close</v-icon>
-      </v-btn>
+      </v-btn> -->
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text :class="{ 'cart-sticky-inner-container': cartItems.length >= 1 }" v-if="cartItems.length">
@@ -21,7 +21,7 @@
                 <v-img contain :width="20" :height="20" :src="require('@/assets/delete-icon.svg')"></v-img>
               </v-btn>
             </div>
-            <p class="item-price">`{{ item.canShowProductsWithChecboxes ? `${item.size}″ - $${item.price}` :  `$${item.price} / ${item.weight}`}}</p>
+            <p class="item-price">{{ item.canShowProductsWithChecboxes ? `${item.size}″ - $${item.price}` :  `$${item.price} / ${item.weight}`}}</p>
             <div class="quantity-control d-flex align-center">
               <v-btn icon @click="
                 item.quantity === 1
@@ -56,7 +56,7 @@
               <v-btn v-for="option in tipOptions" :key="option.percentage"
                 :class="{ 'selected-tip': selectedTip === option.percentage }" @click="selectTip(option.percentage)"
                 outlined class="tip-btn-checkout">
-                {{ option.percentage }}%
+                {{ option.percentage > 0 ? option.percentage + '%' : 'No Tip' }}
               </v-btn>
             </div>
           </v-col>
@@ -134,10 +134,11 @@ export default {
       uploadPercentage: 0,
       fileName: '',
       tipOptions: [
-        { percentage: 25 },
         { percentage: 20 },
         { percentage: 15 },
+        { percentage: 10 },
         { percentage: 0 },
+
       ],
     };
   },
@@ -310,6 +311,8 @@ export default {
   color: white;
   font-weight: bold;
   height: 54px !important;
+  border-radius: 8px !important;
+
   width: 100% !important;
 }
 

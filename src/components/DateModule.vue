@@ -6,12 +6,12 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="8" class="d-flex justify-center">
+      <v-col sm="12" md="8" lg="8" cols="12" class="d-flex justify-center">
         <v-date-picker v-model="date" :min="minDate" :current="currentMonth" color="#E04F00"
           @input="handleDataAndTime(date, time)" :width="500" class="calendar-style hide-header"
           locale="en"></v-date-picker>
       </v-col>
-      <v-col cols="4">
+      <v-col sm="12" md="4" lg="4" cols="12">
         <div class="time-picker-container">
           <label for="time-picker" class="time-picker-label">Select a time</label>
           <v-select v-model="time" :items="times" prepend-inner-icon="mdi-clock-outline" dense

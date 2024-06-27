@@ -10,13 +10,10 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_TO_CART(state, item) {
-      const existingItem = state.cartItems.find((i) => i.id === item.id);
-      if (existingItem) {
-        // this.$root.$emit("show-snackbar", {
-        //   message: "Already Exsist in cart",
-        //   type: "error",
-        // });
-        // existingItem.quantity;
+      const existingItemIndex = state.cartItems.findIndex((i) => i.id === item.id);
+      if (existingItemIndex !== -1) {
+        // Update existing item with new size and price
+        Vue.set(state.cartItems, existingItemIndex, { ...item, quantity: state.cartItems[existingItemIndex].quantity });
       } else {
         state.cartItems.push({ ...item, quantity: 1 });
       }
@@ -41,7 +38,12 @@ export default new Vuex.Store({
     addToCart({ commit, state }, item) {
       const existingItem = state.cartItems.find((i) => i.id === item.id);
       if (existingItem) {
-        return "Already Exist in cart";
+        if (existingItem.size !== item.size) {
+          commit("ADD_TO_CART", item);
+          return "Updated cart item with new size";
+        } else {
+          return "Already Exist in cart";
+        }
       } else {
         commit("ADD_TO_CART", item);
         return "Added to cart";
@@ -69,3 +71,4 @@ export default new Vuex.Store({
       ),
   },
 });
+
