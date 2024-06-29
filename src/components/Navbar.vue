@@ -1,6 +1,40 @@
 <template>
   <div class="header">
-    <div class="header-content">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      temporary
+    >
+      <v-list>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">
+              <router-link to="/" class="logo-link">
+                <img
+                  class="logo"
+                  alt="Mediterranean Restaurants"
+                  :src="require('@/assets/logo-black.svg')"
+                />
+              </router-link>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item v-for="item in menuItems" :key="item.text">
+          <router-link :to="item.link" class="menu-item">
+            {{ item.text }}
+          </router-link>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>
+          <router-link to="/order" class="order-button">Order Now</router-link>
+        </v-list-item>
+        <v-list-item>
+          <router-link to="/contact" class="menu-item">Contact</router-link>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <div class="header-content desktop-menu">
       <router-link to="/" class="logo-link">
         <img
           class="logo"
@@ -8,7 +42,7 @@
           :src="require('@/assets/logo-black.svg')"
         />
       </router-link>
-      <div class="menu ml-10">
+      <div class="menu" :class="{ open: isMenuOpen }">
         <router-link to="/" class="menu-item">Home</router-link>
         <router-link to="/catering" class="menu-item">Catering</router-link>
         <router-link to="/values" class="menu-item">Our Values</router-link>
@@ -21,6 +55,11 @@
         <router-link to="/cart" class="cart-icon">
           <v-img width="40px" :src="require('@/assets/cart-icon.jpeg')"></v-img>
         </router-link>
+        <div class="hamburger" @click="toggleMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +68,24 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      drawer: false,
+      menuItems: [
+        { text: 'Home', link: '/' },
+        { text: 'Catering', link: '/catering' },
+        { text: 'Our Values', link: '/values' },
+        { text: 'FAQ', link: '/faq' },
+        { text: 'Locations', link: '/locations' },
+      ],
+    };
+  },
+  methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer;
+    },
+  },
+
 };
 </script>
 
@@ -96,5 +153,39 @@ export default {
 .cart-icon {
   color: #ff6600; /* Color of the cart icon */
   font-size: 24px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  background: #333;
+  border-radius: 2px;
+  display: block;
+  height: 3px;
+  margin: 5px;
+  width: 25px;
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+  .mobile-menu {
+    display: flex;
+  }
+
 }
 </style>
