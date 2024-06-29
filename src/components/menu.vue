@@ -228,7 +228,7 @@ export default {
     this.productsLoader = true
     try {
       const response = await fetch(
-        "https://backend.aladdincateringhouston.com/api/products?limit=100"
+        "http://backend.vcaterings.com/api/products?limit=100"
       );
       const products = await response.json();
       console.log("products", products);
