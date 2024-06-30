@@ -199,7 +199,7 @@ export default {
 
       // Create the checkout session on your backend
       const response = await fetch(
-        "http://backend.vcaterings.com/create-checkout-session",
+        "https://backend.vcaterings.com/create-checkout-session",
         {
           method: "POST",
           headers: {
