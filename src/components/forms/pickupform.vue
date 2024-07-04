@@ -7,7 +7,7 @@
     </v-row>
     <v-form ref="pickupform" v-model="valid">
       <v-row no-gutters justify="center" class="pa-16">
-        <v-col class="mt-2" cols="12" md="6">
+        <v-col class="mt-2" cols="12" md="6" :lg="6" :xs="6">
           <v-text-field
             v-model="pickupFormData.firstname"
             class="catering-text-field ml-4"
@@ -16,7 +16,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col class="mt-2" cols="12" md="6">
+        <v-col class="mt-2" cols="12" md="6" :lg="6" :xs="6">
           <v-text-field
             v-model="pickupFormData.lastname"
             class="catering-text-field ml-4"
@@ -25,7 +25,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col class="mt-2" cols="12" md="12">
+        <v-col class="mt-2" cols="12" md="12" :lg="12" :xs="12">
           <v-text-field
             v-model="pickupFormData.businessname"
             class="catering-text-field ml-4"
@@ -34,7 +34,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col class="mt-2" cols="12" md="12">
+        <v-col class="mt-2" cols="12" md="12" :lg="12" :xs="12">
           <v-text-field
             v-model="pickupFormData.email"
             hide-details="auto"
@@ -43,7 +43,7 @@
             :rules="[rules.required, rules.email]"
           ></v-text-field>
         </v-col>
-        <v-col class="mt-2" cols="12" md="12">
+        <v-col class="mt-2" cols="12" md="12" :lg="12" :xs="12">
           <v-text-field
             v-model="pickupFormData.phonenumber"
             hide-details="auto"
@@ -122,7 +122,7 @@ export default {
 
 <style scoped>
 .pickup-form-container {
-  background-color: #ed3a1b;
+  background-color: #fe734a;
   color: white;
   padding: 2rem 0;
   background-image: url("@/assets/bg-logo.png");

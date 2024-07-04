@@ -50,7 +50,7 @@ export default {
 }
 
 .status-button {
-  background-color: #ed3a1b;
+  background-color: #fe734a;
   color: white;
   font-size: 16px;
   font-weight: bold;

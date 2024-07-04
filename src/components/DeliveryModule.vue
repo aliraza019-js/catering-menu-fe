@@ -39,7 +39,7 @@
       <Location @active-location="activeLocation($event)" />
       <Guests @number-of-guests="getNumberOfGuests($event)" />
       <PickupForm @pickup-form-data="handlePickupFormData($event)" v-if="isPickupActive" />
-      <DeliveryForm v-if="isDeliveryActive" />
+      <DeliveryForm @delivery-form-data="handleDeliveryFormData($event)" v-if="isDeliveryActive" />
       <DatePIcker @get-date-and-time="handleDateAndTime($event)" />
     </div>
     <v-row v-if="isPickupActive || isDeliveryActive">
@@ -154,6 +154,9 @@ export default {
     handlePickupFormData(data) {
       this.pickupFormInformation.pickupFormData = { ...data };
     },
+    handleDeliveryFormData(data) {
+      this.deliveryFormInformation.deliveryFormData = { ...data };
+    },
     getNumberOfGuests(data) {
       if (this.isPickupActive) {
         this.pickupFormInformation.noOfGuests = data;
@@ -242,7 +245,7 @@ export default {
 }
 
 .delivery-option-active {
-  background-color: #e04f00;
+  background-color: #fe734a;
   padding: 1rem;
   border-radius: 20px;
   height: 208px !important;

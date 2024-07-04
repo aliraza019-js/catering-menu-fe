@@ -62,9 +62,10 @@
           </v-col>
           <v-col cols="12" class="mt-4 py-0">
             <h4>Tax Exempt</h4>
+            <!-- :class="{'justify-space-between' : $vuetify.breakpoint.mdAndUp , 'justify-start' : $vuetify.breakpoint.smAndDown}"  -->
             <div class="d-flex justify-space-between my-4">
               <v-btn :class="{ 'selected-tax-exempt': taxExempt === true }" @click="selectTaxExempt(true)" outlined
-                class="tax-exempt-btn">
+                class="tax-exempt-btn mx-1">
                 Yes
               </v-btn>
               <v-btn :class="{ 'selected-tax-exempt': taxExempt === false }" @click="selectTaxExempt(false)" outlined
@@ -113,7 +114,7 @@
       </v-row>
     </v-card-text>
     <v-card-actions>
-      <v-btn block color="#EB5605" :disabled="!cartItems.length" class="checkout-button my-4" @click="proceedToCheckout">
+      <v-btn block color="#fe734a" :disabled="!cartItems.length" class="checkout-button my-4" @click="proceedToCheckout">
         Proceed to Checkout
       </v-btn>
     </v-card-actions>
@@ -338,35 +339,41 @@ export default {
 }
 
 .v-text-field.tax-exampt-field.catering-text-field{
-  border: 1px solid #EB5605 !important;
+  border: 1px solid #fe734a !important;
   border-radius: 6px !important;
   height: 50px !important;
 }
 
 .v-btn.tip-btn-checkout {
+  @media screen and (max-width: 600px) {
+    width: 23% !important;
+  }
   background-color: white !important;
   color: #333 !important;
-  border: 1px solid #EB5605 !important;
+  border: 1px solid #fe734a !important;
   border-radius: 6px !important;
   width: 100px !important;
 }
 
 .v-btn.tax-exempt-btn {
+  @media screen and (max-width: 600px) {
+    width: 150px !important;
+  }
   background-color: white !important;
   color: #333 !important;
-  border: 1px solid #EB5605 !important;
+  border: 1px solid #fe734a !important;
   border-radius: 6px !important;
   width: 200px !important;
 }
 
 .v-btn.selected-tip,
 .v-btn.selected-tax-exempt {
-  background-color: #EB5605 !important;
+  background-color: #fe734a !important;
   color: white !important;
 }
 
 .file-input-btn {
-  background-color: #EB5605 !important;
+  background-color: #fe734a !important;
   color: white !important;
   font-family: poppins !important;
   text-transform: capitalize !important;

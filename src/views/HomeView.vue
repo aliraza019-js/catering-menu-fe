@@ -55,7 +55,7 @@
           </v-btn>
           <v-toolbar-title>Checkout Cart</v-toolbar-title>
         </v-toolbar>
-        <v-card-text>
+        <v-card-text class="px-0">
           <CheckoutCart @move-to-delivery-module="moveToDelivery($event)"/>
         </v-card-text>
       </v-card>

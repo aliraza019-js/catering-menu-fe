@@ -15,6 +15,7 @@
           @change="$emit('number-of-guests', selectedValue)"
           class="guest-dropdown"
           placeholder="Number of guests"
+          :menu-props="{ maxHeight: '300px' }"
         ></v-select>
       </v-col>
     </v-row>
@@ -26,8 +27,17 @@ export default {
   data() {
     return {
       selectedValue: null,
-      guestOptions: [8, 10, 14, 18, 24, 48, 50],
+      guestOptions: this.generateGuestOptions(),
     };
+  },
+  methods: {
+    generateGuestOptions() {
+      let options = [];
+      for (let i = 10; i <= 200; i++) {
+        options.push(i);
+      }
+      return options;
+    },
   },
 };
 </script>
@@ -39,7 +49,7 @@ export default {
   font-family: poppins !important;
 }
 
-.guest-dropdown{
+.guest-dropdown {
   width: 100%;
 }
 </style>

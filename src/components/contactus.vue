@@ -72,7 +72,7 @@ export default {
 
 <style scoped>
 .contact-us {
-  background-color: #ed3a1b;
+  background-color: #fe734a;
   color: white;
   padding: 2rem 0;
   background-image: url("@/assets/bg-logo.png");

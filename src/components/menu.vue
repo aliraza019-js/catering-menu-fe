@@ -17,38 +17,69 @@
         <h1 class="not-found-title">Not Found</h1>
       </v-col>
     </v-row>
-    <!-- Item Cards Grouped by Category -->
+    <!-- Loop through grouped items by category -->
     <v-row v-else v-for="(items, category) in groupedItemsByCategory" :key="category">
       <v-col cols="12">
         <h1 class="category-title">{{ category }}</h1>
       </v-col>
-      <v-col cols="12" md="6" v-for="item in items" :key="item.name" class="d-flex">
+
+      <!-- Horizontal scroll for items in each category on mobile view -->
+      <div v-if="$vuetify.breakpoint.smAndDown" :class="{ 'd-flex overflow-x-auto': $vuetify.breakpoint.smAndDown }">
+        <v-col cols="12" md="6" v-for="item in items" :key="item.name" class="px-2">
+          <v-card :class="{
+          'custom-card-with-checkboxes': !categoriesWithoutCheckboxes.includes(category),
+          'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
+        }" class="custom-card" outlined>
+            <v-row>
+              <v-col cols="12" md="4">
+                <v-img :src="item.image" class="custom-image" contain></v-img>
+              </v-col>
+              <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
+                class="d-flex flex-column justify-center">
+                <v-card-title class="menu-title">{{ item.name }}</v-card-title>
+                <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
+                  ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
+          formatPrice(item.price) + '/Kabob' : formatPrice(item.price) }}
+                </v-card-subtitle>
+                <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
+                  <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"
+                    :label="`${priceOption.size} - $${priceOption.unit_amount}`" :value="priceOption.unit_amount"
+                    hide-details="auto"></v-radio>
+                </v-radio-group>
+                <v-card-actions>
+                  <v-btn @click="handleAddToCart(item, category)" class="add-to-cart-btn mt-2" color="#fe734a">
+                    Add to Cart
+                  </v-btn>
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </div>
+      <!-- Vertical scroll for items in each category on desktop view -->
+      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="12" md="6" v-for="item in items" :key="item.name" class="px-2">
         <v-card :class="{
-          'custom-card-with-checkboxes':
-            !categoriesWithoutCheckboxes.includes(category),
-          'custom-card-without-checkboxes':
-            categoriesWithoutCheckboxes.includes(category),
+          'custom-card-with-checkboxes': !categoriesWithoutCheckboxes.includes(category),
+          'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
         }" class="custom-card" outlined>
           <v-row>
             <v-col cols="12" md="4">
-              <v-img :src="item.image" class="custom-image" width="500px" contain></v-img>
+              <v-img :src="item.image" class="custom-image" contain></v-img>
             </v-col>
             <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
               class="d-flex flex-column justify-center">
               <v-card-title class="menu-title">{{ item.name }}</v-card-title>
-              <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">$
-                {{
-          shouldDisplayDzn(item)
-            ? formatPrice(item.price) + "/Dzn"
-            : shouldDisplayWithKabab(item) ? formatPrice(item.price) + '/Kabob' : formatPrice(item.price)
-        }}</v-card-subtitle>
+              <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
+                ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
+          formatPrice(item.price) + '/Kabob' : formatPrice(item.price) }}
+              </v-card-subtitle>
               <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
                 <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"
                   :label="`${priceOption.size} - $${priceOption.unit_amount}`" :value="priceOption.unit_amount"
                   hide-details="auto"></v-radio>
               </v-radio-group>
               <v-card-actions>
-                <v-btn @click="handleAddToCart(item, category)" class="add-to-cart-btn mt-2" color="#EB5605">
+                <v-btn @click="handleAddToCart(item, category)" class="add-to-cart-btn mt-2" color="#fe734a">
                   Add to Cart
                 </v-btn>
               </v-card-actions>
@@ -77,12 +108,14 @@ export default {
         "Kibbie Balls",
         "Chicken Sambosak",
       ],
-      productsWithKabab:[
+      productsWithKabab: [
         "Classic Chicken Kabob",
         "Chipotle chicken kabob",
         "Saffron chicken kabob",
         "Filet Steak Beef Kabob",
         "Kafta Kabob Minced Beef",
+        "chick kabaab",
+        "Beef kabeb",
         "Filet Lamb Kabob",
         "Shrimp Kabob",
         "Baked Chicken Quarter"
@@ -164,7 +197,7 @@ export default {
     shouldDisplayDzn(item) {
       return this.productsWithDzn.includes(item.name);
     },
-    shouldDisplayWithKabab(item){
+    shouldDisplayWithKabab(item) {
       return this.productsWithKabab.includes(item.name);
     },
     formatPrice(price) {
@@ -209,6 +242,11 @@ export default {
         EventBus.$emit("show-snackbar", {
           message: "Already Exist in cart",
           type: "error",
+        });
+      } else if(message === 'Added to cart with new size') {
+        EventBus.$emit("show-snackbar", {
+          message: "Added to cart with new size",
+          type: "success",
         });
       } else if (message === "Updated cart item with new size") {
         EventBus.$emit("show-snackbar", {
@@ -335,6 +373,13 @@ export default {
   }
 }
 
+@media screen and (min-width: 600px) {
+  .overflow-x-auto {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
 .v-card {
   width: 100%;
 }
@@ -394,7 +439,7 @@ export default {
 
       .v-icon.mdi-radiobox-marked {
         font-size: 14px !important;
-        color: #e04f00 !important;
+        color: #fe734a !important;
       }
     }
   }

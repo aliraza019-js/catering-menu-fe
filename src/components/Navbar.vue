@@ -137,7 +137,7 @@ export default {
 }
 
 .order-button {
-  background-color: #E04F00; /* Button color matching the design */
+  background-color: #fe734a; /* Button color matching the design */
   color: white;
   padding: 10px 20px;
   border-radius: 8px;

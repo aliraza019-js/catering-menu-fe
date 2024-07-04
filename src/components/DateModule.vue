@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col sm="12" md="8" lg="8" cols="12" class="d-flex justify-center">
-        <v-date-picker v-model="date" :min="minDate" :current="currentMonth" color="#E04F00"
+        <v-date-picker v-model="date" :min="minDate" :current="currentMonth" color="#fe734a"
           @input="handleDataAndTime(date, time)" :width="500" class="calendar-style hide-header"
           locale="en"></v-date-picker>
       </v-col>
@@ -80,7 +80,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  color: #e04f00 !important;
+  color: #fe734a !important;
 }
 
 .time-picker-label {
@@ -93,7 +93,7 @@ export default {
 }
 
 .order-btn.v-btn {
-  background-color: #e04f00 !important;
+  background-color: #fe734a !important;
   color: #fff !important;
 }
 

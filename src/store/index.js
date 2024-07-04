@@ -7,13 +7,20 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     cartItems: [],
+    categoriesWithoutCheckboxes: ["appetizers", "meats"],
   },
   mutations: {
     ADD_TO_CART(state, item) {
-      const existingItemIndex = state.cartItems.findIndex((i) => i.id === item.id);
+      const existingItemIndex = state.cartItems.findIndex(
+        (i) => i.id === item.id && i.size === item.size
+      );
+
       if (existingItemIndex !== -1) {
-        // Update existing item with new size and price
-        Vue.set(state.cartItems, existingItemIndex, { ...item, quantity: state.cartItems[existingItemIndex].quantity });
+        // Item with same size already exists
+        Vue.set(state.cartItems, existingItemIndex, {
+          ...item,
+          quantity: state.cartItems[existingItemIndex].quantity + 1,
+        });
       } else {
         state.cartItems.push({ ...item, quantity: 1 });
       }
@@ -36,15 +43,20 @@ export default new Vuex.Store({
   },
   actions: {
     addToCart({ commit, state }, item) {
-      const existingItem = state.cartItems.find((i) => i.id === item.id);
+      const categoryWithoutCheckbox = state.categoriesWithoutCheckboxes.includes(item.category);
+      const existingItem = state.cartItems.find((i) => i.id === item.id && i.size === item.size);
+
       if (existingItem) {
-        if (existingItem.size !== item.size) {
-          commit("ADD_TO_CART", item);
-          return "Updated cart item with new size";
-        } else {
-          return "Already Exist in cart";
-        }
+        // If the item exists with the same size, show "Already in cart"
+        return "Already Exist in cart";
       } else {
+        // If the category does not allow multiple sizes, update or add the item
+        if (!categoryWithoutCheckbox) {
+          commit("ADD_TO_CART", item);
+          return "Added to cart with new size";
+        }
+
+        // For other categories, add the item normally
         commit("ADD_TO_CART", item);
         return "Added to cart";
       }
@@ -60,10 +72,7 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    cartItems: (state) => {
-      console.log("state.state.cartItems", state.cartItems);
-      return state.cartItems;
-    },
+    cartItems: (state) => state.cartItems,
     cartSubtotal: (state) =>
       state.cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
@@ -71,4 +80,3 @@ export default new Vuex.Store({
       ),
   },
 });
-
