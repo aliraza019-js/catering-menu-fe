@@ -8,12 +8,24 @@ export default new Vuex.Store({
   state: {
     cartItems: [],
     categoriesWithoutCheckboxes: ["appetizers", "meats"],
+    categoriesWithKabab: ["Classic Chicken Kabob",
+      "Chipotle chicken kabob",
+      "Saffron chicken kabob",
+      "Filet Steak Beef Kabob",
+      "Kafta Kabob Minced Beef",
+      "chick kabaab",
+      "Beef kabeb",
+      "Filet Lamb Kabob",
+      "Shrimp Kabob",
+      "Baked Chicken Quarter"]
   },
   mutations: {
     ADD_TO_CART(state, item) {
       const existingItemIndex = state.cartItems.findIndex(
         (i) => i.id === item.id && i.size === item.size
       );
+
+      const initialQuantity = state.categoriesWithKabab.includes(item.name) ? 6 : 1;
 
       if (existingItemIndex !== -1) {
         // Item with same size already exists
@@ -22,7 +34,7 @@ export default new Vuex.Store({
           quantity: state.cartItems[existingItemIndex].quantity + 1,
         });
       } else {
-        state.cartItems.push({ ...item, quantity: 1 });
+        state.cartItems.push({ ...item, quantity: initialQuantity });
       }
     },
     REMOVE_ITEM(state, itemId) {
@@ -36,9 +48,13 @@ export default new Vuex.Store({
     },
     DECREASE_QUANTITY(state, itemId) {
       const item = state.cartItems.find((i) => i.id === itemId);
-      if (item && item.quantity > 1) {
+
+      if (item && item.quantity > 1 && !state.categoriesWithKabab.includes(item.name)) {
         item.quantity -= 1;
-      }
+      } else
+        if (item && item.quantity > 6 && state.categoriesWithKabab.includes(item.name)) {
+          item.quantity -= 1;
+        }
     },
   },
   actions: {

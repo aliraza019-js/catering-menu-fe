@@ -225,13 +225,14 @@ export default {
     async handleAddToCart(item, category) {
       if (!this.validateSelection(item, category)) return;
 
+      console.log('cartItems handleAddToCart', item)
       const newItem = {
         ...item,
         price: this.productsWithDzn.includes(item.name)
-          ? item.price
-          : this.selectedPrice[item.id]
-            ? this.selectedPrice[item.id]
-            : item.price,
+        ? item.price
+        : this.selectedPrice[item.id]
+        ? this.selectedPrice[item.id]
+        : item.price,
         size: this.getSize(this.selectedPrice[item.id]),
         canShowProductsWithChecboxes: !this.categoriesWithoutCheckboxes.includes(category),
         weight: this.productsWithDzn.includes(item.name) ? 'Dzn' : this.productsWithKabab.includes(item.name) ? 'Kabab' : '',
