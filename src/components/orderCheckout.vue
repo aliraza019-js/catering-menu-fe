@@ -1,68 +1,93 @@
 <template>
-  <v-card class="card-container-checkout">
-    <v-card-title class="checkout-card-title">
-      <span class="mx-auto"> Your Cart ({{ cartItems.length }}) </span>
-      <v-spacer></v-spacer>
-      <!-- <v-btn icon @click="closeCart">
-        <v-icon>mdi-close</v-icon>
-      </v-btn> -->
-    </v-card-title>
+  <v-card class="card-container-order-checkout">
+    <!-- <v-card-title class="checkout-card-title">
+        <span class="mx-auto"> Your Cart ({{ cartItems.length }}) </span>
+        <v-spacer></v-spacer>
+        <v-btn icon @click="closeCart">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-card-title> -->
     <v-divider></v-divider>
-    <v-card-text :class="{ 'cart-sticky-inner-container': cartItems.length >= 1 }" v-if="cartItems.length">
-      <v-row v-for="item in cartItems" :key="item.id" class="my-4">
-        <v-col cols="4">
-          <v-img :src="item.image" class="cart-image"></v-img>
-        </v-col>
-        <v-col cols="8">
-          <div>
-            <div class="d-flex justify-space-between">
-              <h3 class="item-title">{{ item.name }}</h3>
-              <v-btn icon @click="removeItem(item.id)">
-                <v-img contain :width="20" :height="20" :src="require('@/assets/delete-icon.svg')"></v-img>
-              </v-btn>
-            </div>
-            <p class="item-price">{{ item.canShowProductsWithChecboxes ? `${item.size}″ - $${item.price}` :  `$${item.price} / ${item.weight}`}}</p>
-            <div class="quantity-control d-flex align-center">
-              <v-btn icon @click="
-                item.quantity === 1
-                  ? removeItem(item.id)
-                  : decreaseQuantity(item.id)
-                ">
-                <v-icon>mdi-minus</v-icon>
-              </v-btn>
-              <span class="mx-2">{{ item.quantity }}</span>
-              <v-btn icon @click="increaseQuantity(item.id)">
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-            </div>
-          </div>
-          <div class="item-total-price">
-            $ {{ (item.price * item.quantity).toFixed(2) }}
-          </div>
-        </v-col>
-      </v-row>
+    <v-card-text :class="{ 'order-cart-sticky-inner-container': cartItems.length >= 1 }" v-if="cartItems.length">
+      <v-expansion-panels v-model="expandedPanels" class="order-summary-main-container">
+        <v-expansion-panel class="order-summary-panel" elevation="0" tile>
+          <v-expansion-panel-header>
+            <v-icon left>mdi-cart</v-icon>
+            <h2 class="my-2">Order Summary</h2>
+            <v-row no-gutters>
+              <v-col cols="12">
+                <v-icon right dark>mdi-chevron-down</v-icon>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-row v-for="item in cartItems" :key="item.id" class="my-4">
+              <v-col cols="4">
+                <v-img :src="item.image" class="order-cart-image"></v-img>
+              </v-col>
+              <v-col cols="8">
+                <div>
+                  <div class="d-flex justify-space-between">
+                    <h3 class="item-title">{{ item.name }}</h3>
+                    <v-btn icon @click="removeItem(item.id)">
+                      <v-img contain :width="20" :height="20" :src="require('@/assets/delete-icon.svg')"></v-img>
+                    </v-btn>
+                  </div>
+                  <p class="item-price">{{ item.canShowProductsWithChecboxes ? `${item.size}″ - $${item.price}` :
+      `$${item.price} / ${item.weight}` }}</p>
+                  <div class="quantity-control d-flex align-center">
+                    <v-btn icon @click="
+      item.quantity === 1
+        ? removeItem(item.id)
+        : decreaseQuantity(item.id)
+      ">
+                      <v-icon>mdi-minus</v-icon>
+                    </v-btn>
+                    <span class="mx-2">{{ item.quantity }}</span>
+                    <v-btn icon @click="increaseQuantity(item.id)">
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                  </div>
+                </div>
+                <div class="item-total-price">
+                  $ {{ (item.price * item.quantity).toFixed(2) }}
+                </div>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+
     </v-card-text>
     <div class="d-flex justify-center align-center h-75 my-auto flex-column" v-else>
-      <v-img :src="require('@/assets/empty-cart.svg')" width="100%" class="cart-image"></v-img>
+      <v-img :src="require('@/assets/empty-cart.svg')" width="100%" class="order-cart-image"></v-img>
       <p class="empty-cart-text">Your Cart Is Currently Empty!</p>
     </div>
     <v-divider></v-divider>
-    <!-- :class="{ 'subtotal-sticky-container': cartItems.length >= 1 }" -->
-    <!-- <v-card-text>
+    <!-- :class="{ 'order-subtotal-sticky-container': cartItems.length >= 1 }" -->
+    <v-card-text>
       <v-row>
         <v-row class="px-5" v-if="cartItems.length">
-          <v-col cols="12" class="mt-4 py-0">
-            <h4>Add a tip</h4>
+          <v-col cols="12" class="mt-4 pa-0">
+            <h2 class="my-2">Add a tip</h2>
             <div class="d-flex justify-space-between my-4">
               <v-btn v-for="option in tipOptions" :key="option.percentage"
                 :class="{ 'selected-tip': selectedTip === option.percentage }" @click="selectTip(option.percentage)"
                 outlined class="tip-btn-checkout">
-                {{ option.percentage > 0 ? option.percentage + '%' : 'No Tip' }}
+                {{ option.percentage > 0 ? option.percentage + '%' : 'Other' }}
               </v-btn>
             </div>
-          </v-col> 
-          <v-col cols="12" class="mt-4 py-0">
-            <h4>Tax Exempt</h4>
+            <v-text-field
+              v-if="selectedTip === 0"
+              v-model.number="customTipAmount"
+              label="Enter custom tip amount"
+              type="number"
+              min="0"
+              class="mt-2"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" class="mt-4 pa-0">
+            <h2 class="my-2">Tax Exempt</h2>
             <div class="d-flex justify-space-between my-4">
               <v-btn :class="{ 'selected-tax-exempt': taxExempt === true }" @click="selectTaxExempt(true)" outlined
                 class="tax-exempt-btn mx-1">
@@ -73,9 +98,10 @@
                 No
               </v-btn>
             </div>
-            <div class="my-2" v-if="taxExempt">
+            <div class="my-2" v-if="taxExempt && canShowTaxExampt">
               <div class="d-flex">
-                <v-text-field class="catering-text-field tax-exampt-field ml-4" placeholder="Upload Tax Exempt Form Here" readonly v-model="fileName"
+                <v-text-field class="catering-text-field tax-exampt-field ml-4"
+                  placeholder="Upload Tax Exempt Form Here" readonly v-model="fileName"
                   hide-details="auto"></v-text-field>
                 <v-btn class="file-input-btn" @click="triggerFileInput">
                   Upload
@@ -87,6 +113,9 @@
             </div>
           </v-col>
         </v-row>
+        <v-col cols="12" class="my-4 py-0">
+          <h2>Order Total</h2>
+        </v-col>
         <v-col cols="12">
           <div class="d-flex justify-space-between">
             <span>Subtotal</span>
@@ -94,7 +123,8 @@
           </div>
         </v-col>
         <v-col cols="12">
-          <div class="d-flex justify-space-between" v-if="!taxExempt || !taxExemptFormUploaded">
+          <!-- v-if="!taxExempt || !taxExemptFormUploaded" -->
+          <div class="d-flex justify-space-between">
             <span>Estimated Tax</span>
             <span>$ {{ tax.toFixed(2) }}</span>
           </div>
@@ -107,29 +137,12 @@
         </v-col>
         <v-col cols="12">
           <div class="d-flex justify-space-between">
-            <h3>Estimated Total</h3>
-            <h3>$ {{ totalWithTip.toFixed(2) }}</h3>
+            <h4>Estimated Total</h4>
+            <h4>$ {{ totalWithTip.toFixed(2) }}</h4>
           </div>
         </v-col>
       </v-row>
-    </v-card-text> -->
-    <v-card-actions>
-      <!-- Subtotal -->
-      <v-row>
-        <v-col cols="12">
-          <div class="d-flex justify-space-between">
-            <span>Subtotal</span>
-            <span>$ {{ subtotal.toFixed(2) }}</span>
-          </div>
-        </v-col>
-        <v-col cols="12">
-          <!-- Checkout button -->
-          <v-btn block color="#fe734a" :disabled="!cartItems.length" class="checkout-button my-4" @click="gotToCheckout">
-            Go to Checkout
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-card-actions>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -141,8 +154,11 @@ import EventBus from "@/eventBus";
 export default {
   data() {
     return {
-      selectedTip: 0,
+      selectedTip: 10,
+      expandedPanels: 0,
+      customTipAmount: 0,
       taxExempt: false,
+      canShowTaxExampt: false,
       taxExemptFormUploaded: false,
       uploadPercentage: 0,
       fileName: '',
@@ -162,10 +178,17 @@ export default {
       return this.cartSubtotal;
     },
     tax() {
-      return this.subtotal * 0.0825;
+      return this.taxExemptFormUploaded ? 0 : this.subtotal * 0.0825;
     },
     tipAmount() {
-      return (this.subtotal + (this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax)) * (this.selectedTip / 100);
+      if (this.selectedTip === 0) {
+        return this.customTipAmount;
+      }
+      return (
+        (this.subtotal +
+          (this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax)) *
+        (this.selectedTip / 100)
+      );
     },
     total() {
       return this.subtotal + (this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax);
@@ -175,15 +198,15 @@ export default {
     },
   },
   watch: {
-    cartItems : {
+    cartItems: {
       deep: true,
       handler(cartItem) {
         console.log('cartItem', cartItem.length)
-        if(cartItem.length >= 3){
+        if (cartItem.length >= 3) {
           EventBus.$emit('show-snackbar', {
-          message: `Please Scroll down to see more products`,
-          type: 'info'
-        });
+            message: `Please Scroll down to see more products`,
+            type: 'info'
+          });
         }
       }
     }
@@ -199,10 +222,12 @@ export default {
       // return price;
     },
     selectTip(percentage) {
+      console.log('percentage', percentage)
       this.selectedTip = percentage;
     },
     selectTaxExempt(value) {
       this.taxExempt = value;
+      this.canShowTaxExampt = value
       if (!value) {
         this.taxExemptFormUploaded = false;
       }
@@ -220,19 +245,21 @@ export default {
           this.uploadPercentage += 10;
           if (this.uploadPercentage >= 100) {
             clearInterval(interval);
+            this.canShowTaxExampt = false
+            this.tax = 0
             this.taxExemptFormUploaded = true;
           }
         }, 100);
       }
     },
-    gotToCheckout(){
+    gotToCheckout() {
       let checkoutData = {
         cartItems: this.cartItems,
         tipAmount: this.tipAmount,
         tax: this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax,
       }
-      this.$router.push({name: 'Checkout', params: {checkoutData: checkoutData}})
-      // this.$emit('move-to-delivery-module', checkoutData)
+      this.$router.push({ name: 'Checkout', params: { checkoutData: checkoutData } })
+      this.$emit('move-to-delivery-module', checkoutData)
     },
     // async handleCheckout() {
     //   const stripe = await loadStripe(
@@ -271,17 +298,24 @@ export default {
 </script>
 
 <style lang="scss">
-.cart-sticky-inner-container {
-  height: 550px !important;
+.order-summary-main-container.v-expansion-panels.v-item-group {
+  .order-summary-panel.v-expansion-panel::before {
+    box-shadow: none !important;
+    // box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  }
+}
+
+.order-cart-sticky-inner-container {
+  height: 250px !important;
   overflow: auto !important;
 }
 
-.subtotal-sticky-container{
-  height: 200px !important;
+.order-subtotal-sticky-container {
+  height: 300px !important;
   overflow: auto !important;
 }
 
-.cart-image {
+.order-cart-image {
   max-width: 100px;
   max-height: 100px;
 }
@@ -338,9 +372,14 @@ export default {
   font-weight: 500 !important;
 }
 
-.card-container-checkout.v-card {
-  height: 100vh;
-  border-radius: 8px !important;
+.card-container-order-checkout.v-card {
+  // height: 500px;
+  // overflow: auto;
+  margin-top: -12px !important;
+  border-radius: 22px !important;
+  box-shadow: 0 0 10px 0 rgba(0, 0,
+      0, 0.1) !important;
+  border: none !important;
 
   .v-card__title.checkout-card-title {
     background-color: #f6f0ed !important;
@@ -351,16 +390,17 @@ export default {
   }
 }
 
-.v-text-field.tax-exampt-field.catering-text-field{
-  border: 1px solid #fe734a !important;
+.v-text-field.tax-exampt-field.catering-text-field {
+  border: none !important;
   border-radius: 6px !important;
-  height: 50px !important;
+  height: 10px !important;
 }
 
 .v-btn.tip-btn-checkout {
   @media screen and (max-width: 600px) {
     width: 23% !important;
   }
+
   background-color: white !important;
   color: #333 !important;
   border: 1px solid #fe734a !important;
@@ -372,6 +412,7 @@ export default {
   @media screen and (max-width: 600px) {
     width: 150px !important;
   }
+
   background-color: white !important;
   color: #333 !important;
   border: 1px solid #fe734a !important;

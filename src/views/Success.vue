@@ -1,40 +1,43 @@
+
 <template>
   <v-container class="order-status-container" fluid>
-    <v-row justify="center" align="center">
-      <v-col cols="12" md="8" class="text-center">
-        <v-img src="@/assets/order-success.png" class="status-icon"></v-img>
-        <h1 class="status-title">Order Successful!</h1>
-        <p class="status-message">
-          Thank you so much for your order! We'll send you a shipping confirmation email.
-        </p>
-        <v-btn color="orange" class="status-button" @click="goBack">
-          Back to Catering
-        </v-btn>
-      </v-col>
-    </v-row>
+      <v-row class="h-100 d-flex" justify="center" align="center">
+        <v-col cols="12" md="8" class="text-center">
+          <v-img src="@/assets/order-success.png" class="status-icon mx-auto"></v-img>
+          <h1 class="status-title">Order Successful!</h1>
+          <p class="status-message">
+              Thank you so much for your order! We'll send you a shipping confirmation email.
+          </p>
+          <v-btn color="#fe734a" class="status-button" @click="goBack">
+            Back to Store
+          </v-btn>
+        </v-col>
+      </v-row>
   </v-container>
 </template>
+
 <script>
 export default {
-  name: "OrderSuccess",
+  name: "OrderCancel",
   methods: {
     goBack() {
-      this.$router.push("/catering");
+      this.$router.push("/");
     }
   }
 };
 </script>
+
 <style scoped>
 .order-status-container {
-  background-color: #000;
-  color: white;
-  padding: 2rem;
-  text-align: center;
+  background-color: #fff !important;
+  color: #000 !important;
+  padding: 2rem !important;
+  text-align: center !important;
 }
 
 .status-icon {
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   margin-bottom: 1rem;
 }
 

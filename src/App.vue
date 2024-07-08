@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar />
+    <!-- <Navbar /> -->
     <Snackbar />
     <!-- <v-app-bar app color="#F6F0ED">
     </v-app-bar> -->
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
+// import Navbar from "@/components/Navbar.vue";
 import Snackbar from "@/components/common/snackbar.vue";
 export default {
   name: "App",
   components: {
-    Navbar,
+    // Navbar,
     Snackbar,
   },
 

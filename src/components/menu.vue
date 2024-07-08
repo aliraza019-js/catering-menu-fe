@@ -39,7 +39,7 @@
                 <v-card-title class="menu-title">{{ item.name }}</v-card-title>
                 <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
                   ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
-          formatPrice(item.price) + '/Kabob' : formatPrice(item.price) }}
+          formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
                 </v-card-subtitle>
                 <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
                   <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"
@@ -71,7 +71,7 @@
               <v-card-title class="menu-title">{{ item.name }}</v-card-title>
               <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
                 ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
-          formatPrice(item.price) + '/Kabob' : formatPrice(item.price) }}
+          formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
               </v-card-subtitle>
               <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
                 <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"

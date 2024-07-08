@@ -44,8 +44,8 @@
     </div>
     <v-row v-if="isPickupActive || isDeliveryActive">
       <v-col cols="12" class="d-flex justify-center mt-4">
-        <v-btn :loading="loader" class="order-btn" @click="orderNow" :disabled="!isFormComplete">
-          <v-icon left>mdi-cart</v-icon> ORDER NOW
+        <v-btn :loading="loader" block color="#fe734a" class="continue-btn" @click="orderNow" :disabled="!isFormComplete">
+          <v-icon left>mdi-cart</v-icon> Continue Payment
         </v-btn>
       </v-col>
     </v-row>
@@ -87,7 +87,7 @@ export default {
       pickupFormInformation: {
         getOrderBy: 'pickup',
         pickupFormData: {},
-        location: '',
+        location: 'montrose',
         noOfGuests: 0,
         date: '',
         time: ''
@@ -95,7 +95,7 @@ export default {
       deliveryFormInformation: {
         getOrderBy: 'delivery',
         deliveryFormData: {},
-        location: '',
+        location: 'montrose',
         noOfGuests: 0,
         date: '',
         time: ''
@@ -232,7 +232,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lan="scss" scoped>
 .delivery-module {
   padding: 2rem 0;
   text-align: center;

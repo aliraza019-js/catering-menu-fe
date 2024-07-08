@@ -7,9 +7,9 @@
           <p class="status-message">
             We're sorry, but your order has been cancelled. If you have any questions, please contact us.
           </p>
-          <!-- <v-btn color="orange" class="status-button" @click="goBack">
-            Back to Catering
-          </v-btn> -->
+          <v-btn color="#fe734a" class="status-button" @click="goBack">
+            Back to Store
+          </v-btn>
         </v-col>
       </v-row>
   </v-container>
@@ -20,7 +20,7 @@ export default {
   name: "OrderCancel",
   methods: {
     goBack() {
-      this.$router.push("/catering");
+      this.$router.push("/");
     }
   }
 };

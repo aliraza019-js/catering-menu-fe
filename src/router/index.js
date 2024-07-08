@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Success from "../views/Success.vue";
 import Cancel from "../views/Cancel.vue";
+import Checkout from "../views/checkout.vue";
+
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,11 @@ const routes = [
     path: "/cancel",
     name: "Cancel",
     component: Cancel,
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: Checkout,
   },
   {
     path: "/about",
