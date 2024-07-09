@@ -16,7 +16,7 @@
       </v-col>
       <v-col class="pa-0 hero-right-top" cols="12" md="6">
         <v-img
-          :src="require('@/assets/banner/hero1.png')"
+          :src="require('@/assets/banner/hero1.jpg')"
           alt="Food Image"
           class="hero-image"
         ></v-img>
@@ -27,7 +27,7 @@
     <v-row v-if="$vuetify.breakpoint.mdAndUp">
       <v-col class="pa-0 small-bottom" cols="12" md="4">
         <v-img
-          :src="require('@/assets/banner/hero2.png')"
+          :src="require('@/assets/banner/hero2.jpg')"
           alt="Small Food Image"
           class="small-hero-image"
         ></v-img>
