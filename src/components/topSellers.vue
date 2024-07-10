@@ -23,7 +23,7 @@
                   height="4"
                 ></v-progress-linear>
               </template>
-              <v-img
+              <!-- <v-img
                 :src="require(`@/assets/topSellers/${item?.image}.png`)"
                 height="236px"
                 width="236px"
@@ -41,7 +41,7 @@
                     ></v-progress-circular>
                   </v-row>
                 </template>
-              </v-img>
+              </v-img> -->
 
               <v-card-title
                 class="font-24 fw-600 d-flex justify-center align-center"
@@ -73,14 +73,14 @@ export default {
           title: "Classic Chicken Kabob",
           description:
             "Tender pieces of White meat chicken marinated in traditional Lebanese spices, garlic, onion, and olive oil, then skewered and grilled to perfection.",
-          image: "chicken-kabab",
+          // image: "chicken-kabab",
           price: "$ 6.99",
         },
         {
           title: "Saffron Rice",
           description:
             "A luxurious rice dish infused with saffron and diced veggies known for its vibrant yellowish color and exquisite aroma.",
-          image: "saffran-rice",
+          // image: "saffran-rice",
           price: "$ 29.99",
         },
         {
@@ -101,14 +101,14 @@ export default {
           title: "Baklava",
           description:
             "Layers of filo pastry filled with chopped nuts and sweetened with honey or syrup.",
-          image: "hummus",
+          // image: "hummus",
           price: "$ 3.99",
         },
         {
           title: "Greek Salad",
           description:
             "A fresh salad with tomatoes, cucumbers, olives, and feta cheese, dressed with olive oil and oregano.",
-          image: "hummus",
+          // image: "hummus",
           price: "$ 7.99",
         },
       ],
