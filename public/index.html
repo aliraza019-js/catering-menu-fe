@@ -48,12 +48,15 @@
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+  <link rel="preload" as="image" href="https://vcaterings.com/img/hero1.43374f2e.jpg">
   <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJnec3NE.woff2" as="font"
     type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrFJdecmNE.woff2" as="font"
     type="font/woff2" crossorigin="anonymous">
 
   <link rel="stylesheet" href="public/styles/global.scss">
+   <!-- Defer non-critical CSS -->
+   <link rel="stylesheet" href="/css/non-critical.css" defer>
 </head>
 
 <body>
@@ -63,6 +66,8 @@
   </noscript>
   <div id="app"></div>
   <!-- built files will be auto injected -->
+     <!-- Defer non-critical JavaScript -->
+     <script src="/js/non-critical.js" defer></script>
 </body>
 
 </html>

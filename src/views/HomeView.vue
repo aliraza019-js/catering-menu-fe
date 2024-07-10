@@ -29,7 +29,7 @@
     <!-- Floating Action Button for mobile view -->
     <v-badge
       v-if="$vuetify.breakpoint.smAndDown"
-      :content="cartItemCount"s
+      :content="cartItemCount"
       color="white"
       overlap
     >
