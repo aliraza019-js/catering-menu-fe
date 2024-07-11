@@ -13,7 +13,7 @@
 
     <v-row v-if="productsLoader" class="h-100 d-flex" justify="center" align="center">
       <v-col cols="12" md="8" class="text-center">
-        <v-img src="@/assets/not-found.png" class="not-found-icon mx-auto"></v-img>
+        <v-img src="@/assets/not-found.jpg" class="not-found-icon mx-auto"></v-img>
         <h1 class="not-found-title">Not Found</h1>
       </v-col>
     </v-row>

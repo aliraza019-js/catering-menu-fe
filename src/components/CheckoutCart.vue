@@ -43,7 +43,7 @@
       </v-row>
     </v-card-text>
     <div class="d-flex justify-center align-center h-75 my-auto flex-column" v-else>
-      <v-img :src="require('@/assets/empty-cart.svg')" width="100%" class="cart-image"></v-img>
+      <v-img :src="require('@/assets/empty-cart.jpg')" width="100%" class="cart-image"></v-img>
       <p class="empty-cart-text">Your Cart Is Currently Empty!</p>
     </div>
     <v-divider></v-divider>
