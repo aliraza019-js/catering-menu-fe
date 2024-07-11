@@ -22,7 +22,7 @@
     <!-- Second Row: Small Image and Big Text -->
     <v-row v-if="$vuetify.breakpoint.mdAndUp">
       <v-col class="pa-0 small-bottom" cols="12" md="4">
-        <v-img  :src="require('@/assets/banner/hero2.jpg')" alt="Small Food Image" class="small-hero-image"></v-img>
+        <v-img :src="require('@/assets/banner/hero2.jpg')" alt="Small Food Image" class="small-hero-image"></v-img>
       </v-col>
       <!-- Great. Healthy.
 Houston Mediterranean Food -->
