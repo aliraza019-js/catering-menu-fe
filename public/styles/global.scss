@@ -22,11 +22,6 @@ body {
     text-transform: none;
 }
 
-// Colors
-
-// .primary{
-//     color: #fe734a;
-// }
 
 .h-100 {
     height: 100vh !important;
@@ -179,12 +174,6 @@ a {
     &:hover {
         text-decoration: underline;
     }
-}
-
-button {
-    font-family: 'Poppins', sans-serif;
-    font-size: $font-size-base;
-    font-weight: $font-weight-normal;
 }
 
 input,
