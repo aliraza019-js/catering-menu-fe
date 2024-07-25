@@ -15,18 +15,20 @@
         </div>
       </v-col>
       <v-col class="pa-0 hero-right-top" cols="12" md="6">
-        <v-img :src="require('@/assets/banner/hero1.jpg')" alt="Food Image" class="hero-image"></v-img>
+        <v-img :src="require('@/assets/banner/hero1.jpg')" width="700" height="400" alt="Food Image"
+          class="hero-image"></v-img>
       </v-col>
     </v-row>
 
     <!-- Second Row: Small Image and Big Text -->
     <v-row v-if="$vuetify.breakpoint.mdAndUp">
-      <v-col class="pa-0 small-bottom" cols="12" md="4">
-        <v-img :src="require('@/assets/banner/hero2.jpg')" alt="Small Food Image" class="small-hero-image"></v-img>
+      <v-col class="pa-0 small-bottom" cols="12" md="2">
+        <v-img :src="require('@/assets/banner/hero2.jpg')" width="300" height="200" alt="Small Food Image"
+          class="small-hero-image"></v-img>
       </v-col>
       <!-- Great. Healthy.
-Houston Mediterranean Food -->
-      <v-col cols="12" md="8" class="big-text-container pa-0">
+        Houston Mediterranean Food -->
+      <v-col cols="12" md="10" class="big-text-container pa-0">
         <!-- <div class="marquee">
           <div class="marquee-content">BIG THINK BIG THINK BIG THINK BIG</div>
         </div> -->
@@ -59,10 +61,10 @@ export default {
   border: 6px solid black;
 }
 
-// .small-bottom {
-//   border-left: 6px solid black;
-//   border-bottom: 6px solid black;
-// }
+.small-bottom {
+  // border-left: 6px solid black;
+  border-bottom: 6px solid black;
+}
 
 .hero-right-top {
   border-right: 6px solid black;
@@ -74,7 +76,7 @@ export default {
   text-align: left;
 }
 
-.small-section-content{
+.small-section-content {
   text-align: left;
 }
 
@@ -86,7 +88,7 @@ export default {
 }
 
 .small-section-title {
-  font-size: 80px !important;
+  font-size: 60px !important;
   font-family: Poppins, sans-serif !important;
   font-weight: 300 !important;
   color: #fe734a;
@@ -99,7 +101,7 @@ export default {
   font-weight: 300 !important;
 }
 
-.small-section-description{
+.small-section-description {
   font-size: 20px !important;
   font-family: Poppins, sans-serif !important;
   font-weight: 300 !important;
@@ -151,5 +153,4 @@ export default {
 //   100% {
 //     transform: translateX(-100%);
 //   }
-// }
-</style>
+// }</style>
