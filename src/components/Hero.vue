@@ -138,7 +138,7 @@ export default {
 
 .hero-container {
   position: relative;
-  background: url(../assets/banner/herobg.png) no-repeat center center;
+  background: url(../assets/banner/herobg.jpg) no-repeat center center;
   background-size: cover;
   height: 625px;
 }
