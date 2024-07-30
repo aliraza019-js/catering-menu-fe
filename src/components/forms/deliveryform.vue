@@ -7,7 +7,7 @@
     </v-row>
     <v-form ref="deliveryform" v-model="valid">
       <v-row no-gutters justify="center" class="pa-16">
-        <v-col cols="12" md="6" lg="6" xs="6">
+        <v-col class="my-2" cols="12" md="6" lg="6" xs="6">
           <v-text-field
             v-model="deliveryFormData.firstname"
             class="catering-text-field ml-4"
@@ -16,7 +16,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="6" lg="6" xs="6">
+        <v-col class="my-2" cols="12" md="6" lg="6" xs="6">
           <v-text-field
             v-model="deliveryFormData.lastname"
             class="catering-text-field ml-4"
@@ -25,7 +25,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="12" lg="12" xs="12">
+        <v-col class="my-2" cols="12" md="12" lg="12" xs="12">
           <v-text-field
             v-model="deliveryFormData.businessname"
             class="catering-text-field ml-4"
@@ -34,7 +34,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="12" lg="12" xs="12">
+        <v-col class="my-2" cols="12" md="12" lg="12" xs="12">
           <v-text-field
             v-model="deliveryFormData.email"
             hide-details="auto"
@@ -43,7 +43,7 @@
             :rules="[rules.required, rules.email]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="12" lg="12" xs="12">
+        <v-col class="my-2" cols="12" md="12" lg="12" xs="12">
           <v-text-field
             v-model="deliveryFormData.phonenumber"
             hide-details="auto"
@@ -52,7 +52,7 @@
             :rules="[rules.required, rules.phone]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="12" lg="12" xs="12">
+        <v-col class="my-2" cols="12" md="12" lg="12" xs="12">
           <v-text-field
             v-model="deliveryFormData.address"
             hide-details="auto"
@@ -61,7 +61,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="12" lg="12" xs="12">
+        <v-col class="my-2" cols="12" md="12" lg="12" xs="12">
           <v-text-field
             v-model="deliveryFormData.address2"
             hide-details="auto"
@@ -69,7 +69,7 @@
             placeholder="Address 2"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="6" lg="6" xs="6">
+        <v-col class="my-2" cols="12" md="6" lg="6" xs="6">
           <v-text-field
             v-model="deliveryFormData.city"
             hide-details="auto"
@@ -78,7 +78,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="6" lg="6" xs="6">
+        <v-col class="my-2" cols="12" md="6" lg="6" xs="6">
           <v-text-field
             v-model="deliveryFormData.state"
             hide-details="auto"
@@ -87,7 +87,7 @@
             :rules="[rules.required]"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="12" lg="12" xs="12">
+        <v-col class="my-2" cols="12" md="12" lg="12" xs="12">
           <v-text-field
             v-model="deliveryFormData.zipcode"
             hide-details="auto"
@@ -128,8 +128,8 @@ export default {
           return pattern.test(value) || 'Invalid e-mail.';
         },
         phone: value => {
-          const pattern = /^\d{10}$/;
-          return pattern.test(value) || 'Invalid phone number. It should be 10 digits.';
+          const pattern = /^\d{13}$/;
+          return pattern.test(value) || 'Invalid phone number';
         }
       }
     };

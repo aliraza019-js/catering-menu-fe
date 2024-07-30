@@ -79,8 +79,8 @@ export default {
           return pattern.test(value) || 'Invalid e-mail.';
         },
         phone: value => {
-          const pattern = /^\d{10}$/;
-          return pattern.test(value) || 'Invalid phone number. It should be 10 digits.';
+          const pattern = /^\d{11}$/;
+          return pattern.test(value) || 'Invalid phone number.';
         }
       }
     };

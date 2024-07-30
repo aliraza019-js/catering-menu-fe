@@ -44,7 +44,8 @@
     </div>
     <v-row v-if="isPickupActive || isDeliveryActive">
       <v-col cols="12" class="d-flex justify-center mt-4">
-        <v-btn :loading="loader" block color="#fe734a" class="continue-btn" @click="orderNow" :disabled="!isFormComplete">
+        <v-btn :loading="loader" block color="#fe734a" class="continue-btn" @click="orderNow"
+          :disabled="!isFormComplete">
           <v-icon left>mdi-cart</v-icon> Continue Payment
         </v-btn>
       </v-col>
@@ -133,8 +134,8 @@ export default {
     },
     cartItems: {
       deep: true,
-      handler(cartitems){
-        if(cartitems.length === 0){
+      handler(cartitems) {
+        if (cartitems.length === 0) {
           this.isPickupActive = false
           this.isDeliveryActive = false
         }

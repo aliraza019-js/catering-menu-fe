@@ -209,6 +209,11 @@ export default {
           });
         }
       }
+    },
+    tipAmount: {
+      handler() {
+        this.goToCheckout();
+      }
     }
   },
   methods: {
@@ -252,7 +257,8 @@ export default {
         }, 100);
       }
     },
-    gotToCheckout() {
+    goToCheckout() {
+      console.log('tipAmount', this.tipAmount)
       let checkoutData = {
         cartItems: this.cartItems,
         tipAmount: this.tipAmount,

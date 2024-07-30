@@ -231,8 +231,9 @@ export default {
         tipAmount: this.tipAmount,
         tax: this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax,
       }
+      console.log('totalAmountData', this.tipAmount)
       this.$router.push({name: 'Checkout', params: {checkoutData: checkoutData}})
-      // this.$emit('move-to-delivery-module', checkoutData)
+      this.$emit('move-to-delivery-module', checkoutData)
     },
     // async handleCheckout() {
     //   const stripe = await loadStripe(
