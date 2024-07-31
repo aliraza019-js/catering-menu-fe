@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Discover our delicious catering menu with a minimum order of $250. Explore a variety of appetizers, meats, salads, and specialty desserts. Order online for delivery or pickup today!">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+   <!-- Preload favicon -->
+   <link rel="preload" href="<%= BASE_URL %>favicon.ico" as="image">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title>Catering Menu</title>
 
@@ -49,10 +51,12 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+  
 
   <!-- Preload Critical Assets -->
   <link rel="preload" as="image" href="https://vcaterings.com/img/herobg.ea50cae2.jpg">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/js/chunk-vendors.78d96615.js" as="script">
    <!-- Preload critical CSS resources -->
    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" as="style">
    <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" as="style">
@@ -70,6 +74,7 @@
 
   <!-- Non-Critical JavaScript -->
   <script src="/js/non-critical.js" defer></script>
+   <script src="https://js.stripe.com/v3" defer></script>
 </body>
 
 </html>
