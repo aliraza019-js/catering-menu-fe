@@ -92,6 +92,14 @@ export default {
   font-weight: 800 !important;
   margin-bottom: 16px;
   color: white !important;
+
+  @media (max-width: 600px) {
+    font-size: 40px !important;
+    font-family: Poppins, sans-serif !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px;
+    color: white !important;
+  }
 }
 
 .small-section-title {
