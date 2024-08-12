@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Discover our delicious catering menu with a minimum order of $250. Explore a variety of appetizers, meats, salads, and specialty desserts. Order online for delivery or pickup today!">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-   <!-- Preload favicon -->
-   <link rel="preload" href="<%= BASE_URL %>favicon.ico" as="image">
+  <!-- Preload favicon -->
+  <link rel="preload" href="<%= BASE_URL %>favicon.ico" as="image" fetchpriority="high">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title>Catering Menu</title>
 
@@ -26,12 +26,12 @@
       border: 6px solid black;
     }
     .hero-title {
-      font-size: 80px;
+      font-size: clamp(40px, 5vw, 80px);
       font-weight: 300;
       margin-bottom: 16px;
     }
     .hero-description {
-      font-size: 20px;
+      font-size: clamp(16px, 2.5vw, 20px);
       font-weight: 300;
     }
     .hero-image {
@@ -46,19 +46,21 @@
     }
   </style>
 
-  <!-- Font and Icon Styles -->
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Preconnect to required origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-  <!-- Preload Critical Assets -->
-  <link rel="preload" as="image" href="https://vcaterings.com/img/herobg.ea50cae2.jpg">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-   <!-- Preload critical CSS resources -->
-   <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" as="style">
-   <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" as="style">
 
-  <!-- Non-Critical CSS -->
+  <!-- Defer non-critical CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" media="print" onload="this.media='all'">
+
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="https://vcaterings.com/img/herobg.ea50cae2.jpg" fetchpriority="high">
+
+  <!-- Defer non-critical CSS -->
   <link rel="stylesheet" href="/css/non-critical.css" media="print" onload="this.media='all'">
 </head>
 
@@ -69,7 +71,7 @@
   </noscript>
   <div id="app"></div>
 
-  <!-- Non-Critical JavaScript -->
+  <!-- Defer non-critical JavaScript -->
   <script src="/js/non-critical.js" defer></script>
 </body>
 
