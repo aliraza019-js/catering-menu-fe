@@ -25,8 +25,8 @@
   </style>
 
   <!-- Preload critical fonts -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
   
   <!-- Preconnect to required origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +39,7 @@
   <link rel="preload" as="image" href="https://vcaterings.com/img/herobg.985092b6.webp" fetchpriority="high">
 
   <!-- Defer non-critical CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="/css/non-critical.css" media="print" onload="this.media='all'">
 </head>
 

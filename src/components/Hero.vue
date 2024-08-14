@@ -31,8 +31,6 @@
   height: 625px;
 
   @media (max-width: 600px) {
-    background: url(../assets/banner/herobg.webp) no-repeat center center;
-    background-size: cover;
     height: 400px;
   }
 }
