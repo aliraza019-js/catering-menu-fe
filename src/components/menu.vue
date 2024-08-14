@@ -13,7 +13,7 @@
 
     <v-row v-if="productsLoader" class="h-100 d-flex" justify="center" align="center">
       <v-col cols="12" md="8" class="text-center">
-        <v-img src="@/assets/not-found.jpg" class="not-found-icon mx-auto"></v-img>
+        <v-img src="@/assets/not-found.jpg" loading="lazy" class="not-found-icon mx-auto"></v-img>
         <h1 class="not-found-title">Not Found</h1>
       </v-col>
     </v-row>
@@ -32,7 +32,7 @@
         }" class="custom-card" outlined>
             <v-row>
               <v-col cols="12" md="4">
-                <v-img :src="item.image" class="custom-image" contain></v-img>
+                <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
               </v-col>
               <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
                 class="d-flex flex-column justify-center">
@@ -64,7 +64,7 @@
         }" class="custom-card" outlined>
           <v-row>
             <v-col cols="12" md="4">
-              <v-img :src="item.image" class="custom-image" contain></v-img>
+              <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
             </v-col>
             <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
               class="d-flex flex-column justify-center">
