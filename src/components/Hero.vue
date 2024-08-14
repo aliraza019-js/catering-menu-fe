@@ -58,34 +58,6 @@ export default {
 </script>
 
 <style lang="scss">
-.hero-left {
-  background-color: #ffd700;
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 6px solid black;
-}
-
-.small-bottom {
-  // border-left: 6px solid black;
-  border-bottom: 6px solid black;
-}
-
-.hero-right-top {
-  border-right: 6px solid black;
-  border-bottom: 6px solid black;
-  border-top: 6px solid black;
-}
-
-.hero-content {
-  text-align: left;
-}
-
-.small-section-content {
-  text-align: left;
-}
-
 .hero-title {
   font-size: 80px !important;
   font-family: Poppins, sans-serif !important;
@@ -100,48 +72,6 @@ export default {
     margin-bottom: 16px;
     color: white !important;
   }
-}
-
-.small-section-title {
-  font-size: 60px !important;
-  font-family: Poppins, sans-serif !important;
-  font-weight: 300 !important;
-  color: #fe734a;
-  margin-bottom: 16px;
-}
-
-.hero-description {
-  font-size: 20px !important;
-  font-family: Poppins, sans-serif !important;
-  font-weight: 300 !important;
-}
-
-.small-section-description {
-  font-size: 20px !important;
-  font-family: Poppins, sans-serif !important;
-  font-weight: 300 !important;
-}
-
-.hero-image {
-  height: 100%;
-  object-fit: cover;
-}
-
-.small-hero-image {
-  height: 100%;
-  object-fit: cover;
-}
-
-.big-text-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #F2F2F2;
-  border-right: 6px solid black !important;
-  border-bottom: 6px solid black !important;
-  //   border-top: 6px solid black !important;
-  border-left: 6px solid black !important;
-  //   border: 6px solid black;
 }
 
 .hero-container {
@@ -170,28 +100,4 @@ export default {
   /* Ensure the content is above the overlay */
 }
 
-// .marquee {
-//   width: 100%;
-//   overflow: hidden;
-//   position: relative;
-// }
-
-// .marquee-content {
-//   display: inline-block;
-//   white-space: nowrap;
-//   animation: marquee 10s linear infinite;
-//   font-size: 128px !important;
-//   font-weight: 200 !important;
-//   font-family: Poppins, sans-serif !important;
-//   color: black;
-// }
-
-// @keyframes marquee {
-//   0% {
-//     transform: translateX(100%);
-//   }
-
-//   100% {
-//     transform: translateX(-100%);
-//   }
-// }</style>
+</style>
