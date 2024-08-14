@@ -1,23 +1,5 @@
 <template>
   <v-container class="hero-container" fluid>
-    <!-- First Row: Large Title and Image -->
-    <!-- <v-row>
-      <v-col cols="12" md="6" class="pa-0">
-        <div class="mx-10"> -->
-    <!-- <p class="hero-description">
-            Since 2006, Aladdin's Catering has enriched Houston's events with
-            authentic Mediterranean cuisine. Celebrated for our dedication to
-            quality and personalized service, we transform any gathering, big or
-            small, into a memorable feast. Dive into our diverse menu and let us
-            elevate your next event.
-          </p> -->
-    <!-- </div>
-      </v-col> -->
-    <!-- <v-col class="pa-0 hero-right-top" cols="12" md="6">
-        <v-img :src="require('@/assets/banner/hero1.jpg')" width="700" height="400" alt="Food Image"
-        class="hero-image"></v-img>
-      </v-col> -->
-    <!-- </v-row> -->
     <v-row>
       <v-col cols="12" md="6" class="pt-16 mt-16">
         <div class="mx-10">
@@ -25,37 +7,8 @@
         </div>
       </v-col>
     </v-row>
-
-    <!-- Second Row: Small Image and Big Text -->
-    <!-- <v-row v-if="$vuetify.breakpoint.mdAndUp">
-      <v-col class="pa-0 small-bottom" cols="12" md="2">
-        <v-img :src="require('@/assets/banner/hero2.jpg')" width="300" height="200" alt="Small Food Image"
-          class="small-hero-image"></v-img>
-      </v-col> -->
-    <!-- Great. Healthy.
-        Houston Mediterranean Food -->
-    <!-- <v-col cols="12" md="10" class="big-text-container pa-0"> -->
-    <!-- <div class="marquee">
-          <div class="marquee-content">BIG THINK BIG THINK BIG THINK BIG</div>
-        </div> -->
-    <!-- <div class="small-section-content mx-10">
-          <h1 class="small-section-title">Great Healthy.</h1>
-          <h3 class="my-2">Houston Mediterranean Food </h3>
-          <p class="small-section-description">
-            Aladdin offers a great variety of Mediterranean salads, spreads, vegetable dishes, sandwiches, shawerma,
-            shish kabob and more, and the best fresh baked pita in town. Vegan-friendly.
-          </p>
-        </div> -->
-    <!-- </v-col> -->
-    <!-- </v-row> -->
   </v-container>
 </template>
-
-<script>
-export default {
-  name: "HeroBanner",
-};
-</script>
 
 <style lang="scss">
 .hero-title {
@@ -67,18 +20,21 @@ export default {
 
   @media (max-width: 600px) {
     font-size: 40px !important;
-    font-family: Poppins, sans-serif !important;
     font-weight: 600 !important;
-    margin-bottom: 16px;
-    color: white !important;
   }
 }
 
 .hero-container {
   position: relative;
-  background: url(../assets/banner/herobg.jpg) no-repeat center center;
+  background: url(../assets/banner/herobg.webp) no-repeat center center;
   background-size: cover;
   height: 625px;
+
+  @media (max-width: 600px) {
+    background: url(../assets/banner/herobg.webp) no-repeat center center;
+    background-size: cover;
+    height: 400px;
+  }
 }
 
 .hero-container::before {
@@ -89,15 +45,11 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  /* Black color with 50% opacity */
   z-index: 1;
-  /* Ensure the overlay is above the background image */
 }
 
-.hero-container>* {
+.hero-container > * {
   position: relative;
   z-index: 2;
-  /* Ensure the content is above the overlay */
 }
-
 </style>
