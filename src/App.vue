@@ -12,8 +12,7 @@
 </template>
 
 <script>
-// import Navbar from "@/components/Navbar.vue";
-import Snackbar from "@/components/common/snackbar.vue";
+const Snackbar = () => import('@/components/common/snackbar.vue');
 export default {
   name: "App",
   components: {
