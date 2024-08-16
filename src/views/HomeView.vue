@@ -7,12 +7,7 @@
     </v-row>
     <v-row>
       <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
-        <!-- <Location />
-        <TopSellers /> -->
         <Menu />
-        <!-- <Contactus /> -->
-        <!-- <Delivery id="delivery-module" :totalAmountData="deliveryTotalData"/> -->
-        <!-- Content goes here -->
       </v-col>
       <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="4">
         <div class="sticky-wrapper">
@@ -20,12 +15,6 @@
         </div>
       </v-col>
     </v-row>
-    <!-- <v-row>
-      <v-col cols="12">
-        <Footer />
-      </v-col>
-    </v-row> -->
-    
     <!-- Floating Action Button for mobile view -->
     <v-badge
       v-if="$vuetify.breakpoint.smAndDown"

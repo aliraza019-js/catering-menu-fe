@@ -3,9 +3,6 @@
     <v-card-title class="checkout-card-title">
       <span class="mx-auto"> Your Cart ({{ cartItems.length }}) </span>
       <v-spacer></v-spacer>
-      <!-- <v-btn icon @click="closeCart">
-        <v-icon>mdi-close</v-icon>
-      </v-btn> -->
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text :class="{ 'cart-sticky-inner-container': cartItems.length >= 1 }" v-if="cartItems.length">
@@ -47,73 +44,7 @@
       <p class="empty-cart-text">Your Cart Is Currently Empty!</p>
     </div>
     <v-divider></v-divider>
-    <!-- :class="{ 'subtotal-sticky-container': cartItems.length >= 1 }" -->
-    <!-- <v-card-text>
-      <v-row>
-        <v-row class="px-5" v-if="cartItems.length">
-          <v-col cols="12" class="mt-4 py-0">
-            <h4>Add a tip</h4>
-            <div class="d-flex justify-space-between my-4">
-              <v-btn v-for="option in tipOptions" :key="option.percentage"
-                :class="{ 'selected-tip': selectedTip === option.percentage }" @click="selectTip(option.percentage)"
-                outlined class="tip-btn-checkout">
-                {{ option.percentage > 0 ? option.percentage + '%' : 'No Tip' }}
-              </v-btn>
-            </div>
-          </v-col> 
-          <v-col cols="12" class="mt-4 py-0">
-            <h4>Tax Exempt</h4>
-            <div class="d-flex justify-space-between my-4">
-              <v-btn :class="{ 'selected-tax-exempt': taxExempt === true }" @click="selectTaxExempt(true)" outlined
-                class="tax-exempt-btn mx-1">
-                Yes
-              </v-btn>
-              <v-btn :class="{ 'selected-tax-exempt': taxExempt === false }" @click="selectTaxExempt(false)" outlined
-                class="tax-exempt-btn">
-                No
-              </v-btn>
-            </div>
-            <div class="my-2" v-if="taxExempt">
-              <div class="d-flex">
-                <v-text-field class="catering-text-field tax-exampt-field ml-4" placeholder="Upload Tax Exempt Form Here" readonly v-model="fileName"
-                  hide-details="auto"></v-text-field>
-                <v-btn class="file-input-btn" @click="triggerFileInput">
-                  Upload
-                </v-btn>
-              </div>
-              <input type="file" ref="fileInput" @change="handleFileUpload" class="d-none" />
-              <v-progress-linear v-if="uploadPercentage > 0" :value="uploadPercentage" class="my-2"></v-progress-linear>
-              <span v-if="uploadPercentage > 0">{{ uploadPercentage }}%</span>
-            </div>
-          </v-col>
-        </v-row>
-        <v-col cols="12">
-          <div class="d-flex justify-space-between">
-            <span>Subtotal</span>
-            <span>$ {{ subtotal.toFixed(2) }}</span>
-          </div>
-        </v-col>
-        <v-col cols="12">
-          <div class="d-flex justify-space-between" v-if="!taxExempt || !taxExemptFormUploaded">
-            <span>Estimated Tax</span>
-            <span>$ {{ tax.toFixed(2) }}</span>
-          </div>
-        </v-col>
-        <v-col cols="12">
-          <div class="d-flex justify-space-between">
-            <span>Tip</span>
-            <span>$ {{ tipAmount.toFixed(2) }}</span>
-          </div>
-        </v-col>
-        <v-col cols="12">
-          <div class="d-flex justify-space-between">
-            <h3>Estimated Total</h3>
-            <h3>$ {{ totalWithTip.toFixed(2) }}</h3>
-          </div>
-        </v-col>
-      </v-row>
-    </v-card-text> -->
-    <v-card-actions>
+     <v-card-actions>
       <!-- Subtotal -->
       <v-row>
         <v-col cols="12">
@@ -235,38 +166,6 @@ export default {
       this.$router.push({name: 'Checkout', params: {checkoutData: checkoutData}})
       this.$emit('move-to-delivery-module', checkoutData)
     },
-    // async handleCheckout() {
-    //   const stripe = await loadStripe(
-    //     "pk_live_51ONQenBDz9FsjJ0OwKgMxvMN3CNFHXVaKprYcAMeUOpZ8qZwqOCWsgXVmIPJqAHdbZpzZM6utUlLVDKQp58saieA00tgVPvMUJ"
-    //   );
-
-    //   // Create the checkout session on your backend
-    //   const response = await fetch(
-    //     "http://localhost:3000/create-checkout-session",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ 
-    //         items: this.cartItems,
-    //         tipAmount: this.tipAmount,
-    //         tax: this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax,
-    //       }),
-    //     }
-    //   );
-
-    //   const session = await response.json();
-
-    //   // Redirect to Stripe Checkout
-    //   const result = await stripe.redirectToCheckout({
-    //     sessionId: session.id,
-    //   });
-
-    //   if (result.error) {
-    //     console.error("ERROR", result.error.message);
-    //   }
-    // },
   },
 };
 </script>

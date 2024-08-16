@@ -91,8 +91,6 @@
           </div>
         </v-col>
         <v-col cols="12" md="6">
-          <!-- {{ activeLocation }} -->
-          <!-- src/assets/montrose-map.png -->
           <v-img
             :src="
               activeLocation == 'montrose'

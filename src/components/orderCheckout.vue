@@ -1,12 +1,5 @@
 <template>
   <v-card class="card-container-order-checkout">
-    <!-- <v-card-title class="checkout-card-title">
-        <span class="mx-auto"> Your Cart ({{ cartItems.length }}) </span>
-        <v-spacer></v-spacer>
-        <v-btn icon @click="closeCart">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </v-card-title> -->
     <v-divider></v-divider>
     <v-card-text :class="{ 'order-cart-sticky-inner-container': cartItems.length >= 1 }" v-if="cartItems.length">
       <v-expansion-panels v-model="expandedPanels" class="order-summary-main-container">
@@ -64,7 +57,6 @@
       <p class="empty-cart-text">Your Cart Is Currently Empty!</p>
     </div>
     <v-divider></v-divider>
-    <!-- :class="{ 'order-subtotal-sticky-container': cartItems.length >= 1 }" -->
     <v-card-text>
       <v-row>
         <v-row class="px-5" v-if="cartItems.length">
@@ -267,38 +259,6 @@ export default {
       this.$router.push({ name: 'Checkout', params: { checkoutData: checkoutData } })
       this.$emit('move-to-delivery-module', checkoutData)
     },
-    // async handleCheckout() {
-    //   const stripe = await loadStripe(
-    //     "pk_live_51ONQenBDz9FsjJ0OwKgMxvMN3CNFHXVaKprYcAMeUOpZ8qZwqOCWsgXVmIPJqAHdbZpzZM6utUlLVDKQp58saieA00tgVPvMUJ"
-    //   );
-
-    //   // Create the checkout session on your backend
-    //   const response = await fetch(
-    //     "http://localhost:3000/create-checkout-session",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ 
-    //         items: this.cartItems,
-    //         tipAmount: this.tipAmount,
-    //         tax: this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax,
-    //       }),
-    //     }
-    //   );
-
-    //   const session = await response.json();
-
-    //   // Redirect to Stripe Checkout
-    //   const result = await stripe.redirectToCheckout({
-    //     sessionId: session.id,
-    //   });
-
-    //   if (result.error) {
-    //     console.error("ERROR", result.error.message);
-    //   }
-    // },
   },
 };
 </script>
@@ -307,7 +267,6 @@ export default {
 .order-summary-main-container.v-expansion-panels.v-item-group {
   .order-summary-panel.v-expansion-panel::before {
     box-shadow: none !important;
-    // box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
   }
 }
 
@@ -379,8 +338,6 @@ export default {
 }
 
 .card-container-order-checkout.v-card {
-  // height: 500px;
-  // overflow: auto;
   margin-top: -12px !important;
   border-radius: 22px !important;
   box-shadow: 0 0 10px 0 rgba(0, 0,

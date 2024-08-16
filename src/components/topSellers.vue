@@ -23,25 +23,6 @@
                   height="4"
                 ></v-progress-linear>
               </template>
-              <!-- <v-img
-                :src="require(`@/assets/topSellers/${item?.image}.png`)"
-                height="236px"
-                width="236px"
-                class="mx-auto"
-              >
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-1"
-                    ></v-progress-circular>
-                  </v-row>
-                </template>
-              </v-img> -->
 
               <v-card-title
                 class="font-24 fw-600 d-flex justify-center align-center"

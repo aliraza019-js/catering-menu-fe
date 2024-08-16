@@ -192,7 +192,6 @@ export default {
           message: `Please add items to cart first`,
           type: 'warning'
         });
-        // this.$toast.error("Please add items to cart first");
       }
     },
     async orderNow() {
@@ -255,7 +254,6 @@ export default {
 
 .delivery-option {
   background-color: #fae1d4;
-  /* border: 1px solid #888888 !important; */
   padding: 1rem;
   border-radius: 10px;
   height: 208px !important;
