@@ -8,7 +8,7 @@
     <v-card-text :class="{ 'cart-sticky-inner-container': cartItems.length >= 1 }" v-if="cartItems.length">
       <v-row v-for="item in cartItems" :key="item.id" class="my-4">
         <v-col cols="4">
-          <v-img :src="item.image" class="cart-image"></v-img>
+          <v-img :src="item.image" class="cart-image" loading="lazy"></v-img>
         </v-col>
         <v-col cols="8">
           <div>

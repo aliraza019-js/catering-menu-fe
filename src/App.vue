@@ -8,7 +8,7 @@
 </template>
 
 <script>
-const Snackbar = () => import(/* webpackPrefetch: true */ '@/components/common/snackbar.vue');
+const Snackbar = () => import(/* webpackChunkName: "snackbar" */ '@/components/common/snackbar.vue');
 export default {
   name: "App",
   components: {
