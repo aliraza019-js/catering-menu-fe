@@ -2,12 +2,12 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
-        <Hero/>
+        <Hero v-once/>
       </v-col>
     </v-row>
     <v-row>
       <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
-        <Menu/>
+        <ProductsMenu />
       </v-col>
       <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="4">
         <div class="sticky-wrapper">
@@ -41,36 +41,15 @@
 </template>
 
 <script>
-// import Hero from "../components/Hero";
-// import Menu from "../components/menu";
+import Hero from "../components/Hero";
+import ProductsMenu from "../components/menu";
 import CheckoutCart from "@/components/CheckoutCart";
-// const Location = () => import("../components/Location");
-// const TopSellers = () => import("../components/topSellers");
-// const Contactus = () => import("@/components/contactus");
-// const Delivery = () => import("@/components/DeliveryModule");
-// const Footer = () => import("@/components/Footer");
-
-const Hero = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import(/* webpackChunkName: "hero" */ '../components/Hero.vue'));
-    }, 200); // Optional delay to simulate loading indicator
-  });
-};
-
-const Menu = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import(/* webpackChunkName: "menu" */ '../components/menu.vue'));
-    }, 200); // Optional delay to simulate loading indicator
-  });
-};
 
 export default {
   name: "Home",
   components: {
     Hero,
-    Menu,
+    ProductsMenu,
     CheckoutCart,
   },
   data() {
