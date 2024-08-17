@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
-        <Hero />
+        <Hero v-once/>
       </v-col>
     </v-row>
     <v-row>
@@ -16,8 +16,8 @@
       </v-col>
     </v-row>
     <!-- Floating Action Button for mobile view -->
-    <v-badge v-if="$vuetify.breakpoint.smAndDown" :content="cartItemCount" color="white" overlap>
-      <v-btn class="checkout-fab" color="primary" dark fab bottom right @click="checkoutDialog = true">
+    <v-badge v-show="$vuetify.breakpoint.smAndDown" :content="cartItemCount" color="white" overlap>
+      <v-btn v-once class="checkout-fab" color="primary" dark fab bottom right @click="checkoutDialog = true">
         <v-icon>mdi-cart</v-icon>
       </v-btn>
     </v-badge>
