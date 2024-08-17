@@ -41,14 +41,30 @@
 </template>
 
 <script>
-import Hero from "../components/Hero";
-import Menu from "../components/menu";
+// import Hero from "../components/Hero";
+// import Menu from "../components/menu";
 import CheckoutCart from "@/components/CheckoutCart";
 // const Location = () => import("../components/Location");
 // const TopSellers = () => import("../components/topSellers");
 // const Contactus = () => import("@/components/contactus");
 // const Delivery = () => import("@/components/DeliveryModule");
 // const Footer = () => import("@/components/Footer");
+
+const Hero = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import(/* webpackChunkName: "hero" */ '../components/Hero.vue'));
+    }, 200); // Optional delay to simulate loading indicator
+  });
+};
+
+const Menu = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import(/* webpackChunkName: "menu" */ '../components/menu.vue'));
+    }, 200); // Optional delay to simulate loading indicator
+  });
+};
 
 export default {
   name: "Home",
