@@ -8,11 +8,11 @@
 </template>
 
 <script>
-const Snackbar = () => import(/* webpackChunkName: "snackbar" */ '@/components/common/snackbar.vue');
+import snackbar from './components/common/snackbar.vue';
 export default {
   name: "App",
   components: {
-    Snackbar,
+    snackbar,
   },
 
   data: () => ({
