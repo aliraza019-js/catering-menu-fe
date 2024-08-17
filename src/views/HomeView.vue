@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
-        <Hero v-once/>
+        <Hero/>
       </v-col>
     </v-row>
     <v-row>

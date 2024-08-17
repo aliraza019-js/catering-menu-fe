@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Snackbar />
+    <Snackbar v-once/>
     <v-main>
       <router-view />
     </v-main>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-const Snackbar = () => import('@/components/common/snackbar.vue');
+import Snackbar from './components/common/snackbar.vue';
 export default {
   name: "App",
   components: {
