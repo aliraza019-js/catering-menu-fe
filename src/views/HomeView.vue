@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import Hero from "../components/Hero";
+const Hero = () => import(/* webpackChunkName: "hero" */ '../components/Hero.vue');
 import ProductsMenu from "../components/menu";
 import CheckoutCart from "@/components/CheckoutCart";
 // const Location = () => import("../components/Location");
@@ -53,7 +53,6 @@ import CheckoutCart from "@/components/CheckoutCart";
 export default {
   name: "Home",
   components: {
-    Hero,
     ProductsMenu,
     CheckoutCart,
   },
