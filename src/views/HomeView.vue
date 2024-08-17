@@ -2,12 +2,12 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
-        <Hero/>
+        <Hero v-once/>
       </v-col>
     </v-row>
     <v-row>
       <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
-        <ProductsMenu/>
+        <Menu/>
       </v-col>
       <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="4">
         <div class="sticky-wrapper">
@@ -41,8 +41,8 @@
 </template>
 
 <script>
-const Hero = () => import(/* webpackChunkName: "hero" */ '../components/Hero.vue');
-import ProductsMenu from "../components/menu";
+import Hero from "../components/Hero";
+import Menu from "../components/menu";
 import CheckoutCart from "@/components/CheckoutCart";
 // const Location = () => import("../components/Location");
 // const TopSellers = () => import("../components/topSellers");
@@ -54,7 +54,7 @@ export default {
   name: "Home",
   components: {
     Hero,
-    ProductsMenu,
+    Menu,
     CheckoutCart,
   },
   data() {
