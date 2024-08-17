@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
-        <Menu />
+        <ProductsMenu/>
       </v-col>
       <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="4">
         <div class="sticky-wrapper">
@@ -42,7 +42,7 @@
 
 <script>
 import Hero from "../components/Hero";
-import Menu from "../components/menu";
+import ProductsMenu from "../components/menu";
 import CheckoutCart from "@/components/CheckoutCart";
 // const Location = () => import("../components/Location");
 // const TopSellers = () => import("../components/topSellers");
@@ -54,7 +54,7 @@ export default {
   name: "Home",
   components: {
     Hero,
-    Menu,
+    ProductsMenu,
     CheckoutCart,
   },
   data() {
