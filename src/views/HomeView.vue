@@ -44,23 +44,18 @@
 import Hero from "../components/Hero";
 import Menu from "../components/menu";
 import CheckoutCart from "@/components/CheckoutCart";
-const Location = () => import("../components/Location");
-const TopSellers = () => import("../components/topSellers");
-const Contactus = () => import("@/components/contactus");
-const Delivery = () => import("@/components/DeliveryModule");
-const Footer = () => import("@/components/Footer");
+// const Location = () => import("../components/Location");
+// const TopSellers = () => import("../components/topSellers");
+// const Contactus = () => import("@/components/contactus");
+// const Delivery = () => import("@/components/DeliveryModule");
+// const Footer = () => import("@/components/Footer");
 
 export default {
   name: "Home",
   components: {
     Hero,
-    Location,
-    TopSellers,
     Menu,
     CheckoutCart,
-    Contactus,
-    Delivery,
-    Footer,
   },
   data() {
     return {
