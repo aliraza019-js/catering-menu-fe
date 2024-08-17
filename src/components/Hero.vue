@@ -19,7 +19,7 @@
   color: white !important;
 
   @media (max-width: 600px) {
-    font-size: 40px !important;
+    font-size: 30px !important;
     font-weight: 600 !important;
   }
 }
@@ -31,7 +31,7 @@
   height: 625px;
 
   @media (max-width: 600px) {
-    height: 400px;
+    height: 300px;
   }
 }
 
