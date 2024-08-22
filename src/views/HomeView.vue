@@ -7,11 +7,11 @@
     </v-row>
     <v-row>
       <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
-        <ProductsMenu />
+        <Menu v-if="menuVisible" />
       </v-col>
       <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="4">
         <div class="sticky-wrapper">
-          <CheckoutCart @move-to-delivery-module="moveToDelivery($event)" />
+          <CheckoutCart v-if="checkoutCartVisible" @move-to-delivery-module="moveToDelivery($event)" />
         </div>
       </v-col>
     </v-row>
@@ -42,26 +42,36 @@
 
 <script>
 import Hero from "../components/Hero";
-import ProductsMenu from "../components/menu";
+import Menu from "../components/menu";
 import CheckoutCart from "@/components/CheckoutCart";
+// const Location = () => import("../components/Location");
 
 export default {
   name: "Home",
   components: {
     Hero,
-    ProductsMenu,
+    Menu,
     CheckoutCart,
   },
   data() {
     return {
       deliveryTotalData: {},
       checkoutDialog: false,
+      menuVisible: false,
+      checkoutCartVisible: false,
     }
   },
   computed: {
     cartItemCount() {
       return this.$store.getters.cartItems.length;
     }
+  },
+  mounted() {
+    // Load components after initial render
+    this.$nextTick(() => {
+      this.menuVisible = true;
+      this.checkoutCartVisible = true;
+    });
   },
   methods: {
     moveToDelivery(data) {

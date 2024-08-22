@@ -1,6 +1,6 @@
 <template>
   <v-container class="my-4">
-    <v-row class="my-3">
+    <v-row v-once class="my-3">
       <v-col cols="12" md="6" class="text-left">
         <h3 class="text-dark-grey font-40">Catering Menu</h3>
         <p class="text-dark-grey mt-5 font-20">* The minimum orders for catering is 250$</p>
@@ -11,7 +11,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="productsLoader" class="h-100 d-flex" justify="center" align="center">
+    <v-row v-if="productsLoader || !items.length" class="h-100 d-flex" justify="center" align="center">
       <v-col cols="12" md="8" class="text-center">
         <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
         <h1 class="not-found-title">Not Found</h1>
@@ -229,10 +229,10 @@ export default {
       const newItem = {
         ...item,
         price: this.productsWithDzn.includes(item.name)
-        ? item.price
-        : this.selectedPrice[item.id]
-        ? this.selectedPrice[item.id]
-        : item.price,
+          ? item.price
+          : this.selectedPrice[item.id]
+            ? this.selectedPrice[item.id]
+            : item.price,
         size: this.getSize(this.selectedPrice[item.id]),
         canShowProductsWithChecboxes: !this.categoriesWithoutCheckboxes.includes(category),
         weight: this.productsWithDzn.includes(item.name) ? 'Dzn' : this.productsWithKabab.includes(item.name) ? 'Kabab' : '',
@@ -244,7 +244,7 @@ export default {
           message: "Already Exist in cart",
           type: "error",
         });
-      } else if(message === 'Added to cart with new size') {
+      } else if (message === 'Added to cart with new size') {
         EventBus.$emit("show-snackbar", {
           message: "Added to cart with new size",
           type: "success",
@@ -264,20 +264,26 @@ export default {
   },
 
   async created() {
-    this.productsLoader = true
+    this.productsLoader = true;
     try {
       const response = await fetch(
         "https://backend.vcaterings.com/api/products?limit=100"
       );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const products = await response.json();
       console.log("products", products);
       this.items = products.reverse();
-      this.productsLoader = false
     } catch (error) {
-      this.productsLoader = false
-      console.error("Error fetching products:", error);
+      console.error("Error fetching products:", error.message || error);
+    } finally {
+      this.productsLoader = false;
     }
-  },
+  }
+
 };
 </script>
 
