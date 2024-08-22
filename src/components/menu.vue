@@ -1,5 +1,5 @@
 <template>
-  <v-container v-once class="my-4">
+  <v-container class="my-4">
     <v-row class="my-3">
       <v-col cols="12" md="6" class="text-left">
         <h3 class="text-dark-grey font-40">Catering Menu</h3>
