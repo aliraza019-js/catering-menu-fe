@@ -32,8 +32,7 @@
         }" class="custom-card" outlined>
             <v-row>
               <v-col cols="12" md="4">
-                <v-img :src="item.image" :srcset="`${item.image}?w=600 600w, ${item.image}?w=1200 1200w`"
-                  sizes="(max-width: 600px) 100vw, 50vw" class="custom-image" loading="lazy" contain></v-img>
+                <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
               </v-col>
               <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
                 class="d-flex flex-column justify-center">
@@ -65,8 +64,7 @@
         }" class="custom-card" outlined>
           <v-row>
             <v-col cols="12" md="4">
-              <v-img :src="item.image" :srcset="`${item.image}?w=600 600w, ${item.image}?w=1200 1200w`"
-                sizes="(max-width: 600px) 100vw, 50vw" class="custom-image" loading="lazy" contain></v-img>
+              <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
             </v-col>
             <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
               class="d-flex flex-column justify-center">
