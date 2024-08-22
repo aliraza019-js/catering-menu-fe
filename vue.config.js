@@ -1,10 +1,10 @@
 const { defineConfig } = require("@vue/cli-service");
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = defineConfig({
   transpileDependencies: ["vuetify"],
   lintOnSave: false,
 
-  // Add production-specific optimizations
   chainWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       // Optimize Vuetify
@@ -13,11 +13,10 @@ module.exports = defineConfig({
       }])
 
       // Enable gzip compression
-      config.plugin('CompressionPlugin').use(require('compression-webpack-plugin'))
+      config.plugin('CompressionPlugin').use(CompressionPlugin)
     }
   },
 
-  // Configure webpack for better performance
   configureWebpack: {
     optimization: {
       splitChunks: {
@@ -33,7 +32,6 @@ module.exports = defineConfig({
     }
   },
 
-  // Configure the dev server for better performance during development
   devServer: {
     compress: true,
     overlay: {
@@ -42,10 +40,7 @@ module.exports = defineConfig({
     }
   },
 
-  // Enable modern mode for production builds
-  modern: process.env.NODE_ENV === 'production',
-
-  // Configure PWA if you're using it
+  // PWA configuration (if you're using PWA features)
   pwa: {
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
