@@ -1,57 +1,91 @@
 <template>
   <v-container class="my-4">
-    <template v-once>
-      <v-row class="my-3">
-        <v-col cols="12" md="6" class="text-left">
-          <h3 class="text-dark-grey font-40">Catering Menu</h3>
-          <p class="text-dark-grey mt-5 font-20">* The minimum orders for catering is 250$</p>
-        </v-col>
-        <v-col cols="12" md="6" class="text-right">
-          <v-text-field
-            v-model="searchMenu"
-            label="Search"
-            append-icon="mdi-magnify"
-            class="search-menu"
-            @click:append="performSearch"
-            solo
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </template>
-
-    <v-row v-if="productsLoader || !filteredItems.length" class="h-100 d-flex" justify="center" align="center">
-      <v-col cols="12" md="8" class="text-center">
-        <v-img
-          src="@/assets/not-found.webp"
-          loading="lazy"
-          class="not-found-icon mx-auto"
-        ></v-img>
-        <h1 class="not-found-title">Not Found</h1>
+    <v-row v-once class="my-3">
+      <v-col cols="12" md="6" class="text-left">
+        <h3 class="text-dark-grey font-40">Catering Menu</h3>
+        <p class="text-dark-grey mt-5 font-20">* The minimum orders for catering is 250$</p>
+      </v-col>
+      <v-col cols="12" md="6" class="text-right">
+        <v-text-field v-model="searchMenu" label="Search" append-icon="mdi-magnify" class="search-menu"
+          @click:append="performSearch" solo></v-text-field>
       </v-col>
     </v-row>
 
+    <v-row v-if="productsLoader || !items.length" class="h-100 d-flex" justify="center" align="center">
+      <v-col cols="12" md="8" class="text-center">
+        <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
+        <h1 class="not-found-title">Not Found</h1>
+      </v-col>
+    </v-row>
+    <!-- Loop through grouped items by category -->
     <v-row v-else v-for="(items, category) in groupedItemsByCategory" :key="category">
       <v-col cols="12">
         <h1 class="category-title">{{ category }}</h1>
       </v-col>
 
-      <div v-if="$vuetify.breakpoint.smAndDown" class="d-flex overflow-x-auto">
+      <!-- Horizontal scroll for items in each category on mobile view -->
+      <div v-if="$vuetify.breakpoint.smAndDown" :class="{ 'd-flex overflow-x-auto': $vuetify.breakpoint.smAndDown }">
         <v-col cols="12" md="6" v-for="item in items" :key="item.name" class="px-2">
-          <MenuCard
-          :item="item"
-          :category="category"
-          :selectedPrice.sync="selectedPrice"
-          :prices="prices"
-          :categoriesWithoutCheckboxes="categoriesWithoutCheckboxes"
-          :productsWithDzn="productsWithDzn"
-          :productsWithKabab="productsWithKabab"
-          @add-to-cart="handleAddToCart"
-        />
+          <v-card :class="{
+          'custom-card-with-checkboxes': !categoriesWithoutCheckboxes.includes(category),
+          'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
+        }" class="custom-card" outlined>
+            <v-row>
+              <v-col cols="12" md="4">
+                <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
+              </v-col>
+              <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
+                class="d-flex flex-column justify-center">
+                <v-card-title class="menu-title">{{ item.name }}</v-card-title>
+                <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
+                  ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
+          formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
+                </v-card-subtitle>
+                <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
+                  <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"
+                    :label="`${priceOption.size} - $${priceOption.unit_amount}`" :value="priceOption.unit_amount"
+                    hide-details="auto"></v-radio>
+                </v-radio-group>
+                <v-card-actions>
+                  <v-btn @click="handleAddToCart(item, category)" class="add-to-cart-btn mt-2" color="#fe734a">
+                    Add to Cart
+                  </v-btn>
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
         </v-col>
       </div>
-      
+      <!-- Vertical scroll for items in each category on desktop view -->
       <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="12" md="6" v-for="item in items" :key="item.name" class="px-2">
-        <MenuCard :item="item" :prices="prices" :category="category" @add-to-cart="handleAddToCart" />
+        <v-card :class="{
+          'custom-card-with-checkboxes': !categoriesWithoutCheckboxes.includes(category),
+          'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
+        }" class="custom-card" outlined>
+          <v-row>
+            <v-col cols="12" md="4">
+              <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
+            </v-col>
+            <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
+              class="d-flex flex-column justify-center">
+              <v-card-title class="menu-title">{{ item.name }}</v-card-title>
+              <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
+                ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
+          formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
+              </v-card-subtitle>
+              <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
+                <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"
+                  :label="`${priceOption.size} - $${priceOption.unit_amount}`" :value="priceOption.unit_amount"
+                  hide-details="auto"></v-radio>
+              </v-radio-group>
+              <v-card-actions>
+                <v-btn @click="handleAddToCart(item, category)" class="add-to-cart-btn mt-2" color="#fe734a">
+                  Add to Cart
+                </v-btn>
+              </v-card-actions>
+            </v-col>
+          </v-row>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -60,15 +94,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import EventBus from "@/eventBus";
-import MenuCard from "@/components/menuCard.vue"; // Import the new MenuCard component
 
 export default {
-  components: {
-    MenuCard
-  },
   data() {
     return {
       searchMenu: "",
+      selectedCategory: "Menu",
       productsLoader: false,
       categoriesWithoutCheckboxes: ["appetizers", "meats"],
       productsWithDzn: [
@@ -96,17 +127,38 @@ export default {
         { size: "18", unit_amount: "79.99" },
         { size: "24", unit_amount: "99.99" },
       ],
+      categories: [
+        "Menu",
+        "Appetizers",
+        "Dips & Pita",
+        "Salads",
+        "Hot Veggies",
+        "Rice",
+        "Meats",
+        "Specialty Desserts",
+        "Drinks",
+      ],
       items: [],
     };
   },
   computed: {
     ...mapGetters(["cartItems"]),
+    uniqueCategories() {
+      return [...new Set(this.filteredItems.map((item) => item.category))];
+    },
     filteredItems() {
-      if (!this.searchMenu) {
+      if (this.selectedCategory === "Menu" && !this.searchMenu) {
         return this.items;
       }
-      return this.items.filter((item) =>
-        item.name.toLowerCase().includes(this.searchMenu.toLowerCase())
+      if (this.selectedCategory === "Menu" && this.searchMenu) {
+        return this.items.filter((item) =>
+          item.name.toLowerCase().includes(this.searchMenu.toLowerCase())
+        );
+      }
+      return this.items.filter(
+        (item) =>
+          item.category === this.selectedCategory &&
+          item.name.toLowerCase().includes(this.searchMenu.toLowerCase())
       );
     },
     groupedItemsByCategory() {
@@ -118,9 +170,17 @@ export default {
         return acc;
       }, {});
     },
+    getItemQuantity() {
+      return (item) => {
+        const cartItem = this.cartItems.find(
+          (cartItem) => cartItem.id === item.id
+        );
+        return cartItem ? cartItem.quantity : 0;
+      };
+    },
   },
   methods: {
-    ...mapActions(["addToCart"]),
+    ...mapActions(["addToCart", "increaseQuantity", "decreaseQuantity"]),
     performSearch() {
       console.log("Searching for:", this.searchMenu);
     },
@@ -137,30 +197,72 @@ export default {
     shouldDisplayDzn(item) {
       return this.productsWithDzn.includes(item.name);
     },
+    shouldDisplayWithKabab(item) {
+      return this.productsWithKabab.includes(item.name);
+    },
+    formatPrice(price) {
+      price = typeof price === "number" ? price.toFixed(2) : price;
+      if (price.endsWith(".00")) {
+        return price.slice(0, -3); // Remove '.00'
+      }
+      return price;
+    },
+    filterCategory(category) {
+      this.selectedCategory = category;
+    },
+    increaseQuantity(item) {
+      this.$store.dispatch("increaseQuantity", item);
+    },
+    decreaseQuantity(item) {
+      this.$store.dispatch("decreaseQuantity", item);
+    },
+    getSize(unitAmount) {
+      if (unitAmount === "39.99") return "12";
+      if (unitAmount === "59.99") return "16";
+      if (unitAmount === "79.99") return "18";
+      return "24";
+    },
     async handleAddToCart(item, category) {
       if (!this.validateSelection(item, category)) return;
 
+      console.log('cartItems handleAddToCart', item)
       const newItem = {
         ...item,
         price: this.productsWithDzn.includes(item.name)
           ? item.price
-          : this.selectedPrice[item.id] || item.price,
-        size: this.selectedPrice[item.id] ? this.getSize(this.selectedPrice[item.id]) : undefined,
+          : this.selectedPrice[item.id]
+            ? this.selectedPrice[item.id]
+            : item.price,
+        size: this.getSize(this.selectedPrice[item.id]),
+        canShowProductsWithChecboxes: !this.categoriesWithoutCheckboxes.includes(category),
+        weight: this.productsWithDzn.includes(item.name) ? 'Dzn' : this.productsWithKabab.includes(item.name) ? 'Kabab' : '',
       };
 
       const message = await this.addToCart(newItem);
-      this.handleCartMessage(message);
-    },
-    handleCartMessage(message) {
-      const messages = {
-        "Already Exist in cart": { type: "error" },
-        "Added to cart with new size": { type: "success" },
-        "Updated cart item with new size": { type: "success" },
-        "Added to cart": { type: "success" },
-      };
-      EventBus.$emit("show-snackbar", { message, type: messages[message]?.type || "info" });
+      if (message === "Already Exist in cart") {
+        EventBus.$emit("show-snackbar", {
+          message: "Already Exist in cart",
+          type: "error",
+        });
+      } else if (message === 'Added to cart with new size') {
+        EventBus.$emit("show-snackbar", {
+          message: "Added to cart with new size",
+          type: "success",
+        });
+      } else if (message === "Updated cart item with new size") {
+        EventBus.$emit("show-snackbar", {
+          message: "Updated cart item with new size",
+          type: "success",
+        });
+      } else if (message === "Added to cart") {
+        EventBus.$emit("show-snackbar", {
+          message: "Added to cart",
+          type: "success",
+        });
+      }
     },
   },
+
   async created() {
     this.productsLoader = true;
     try {
@@ -173,13 +275,15 @@ export default {
       }
 
       const products = await response.json();
+      console.log("products", products);
       this.items = products.reverse();
     } catch (error) {
       console.error("Error fetching products:", error.message || error);
     } finally {
       this.productsLoader = false;
     }
-  },
+  }
+
 };
 </script>
 
