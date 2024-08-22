@@ -16,14 +16,14 @@
       </v-col>
     </v-row>
     <!-- Floating Action Button for mobile view -->
-    <v-badge v-show="$vuetify.breakpoint.smAndDown" :content="cartItemCount" color="white" overlap>
+    <!-- <v-badge v-show="$vuetify.breakpoint.smAndDown" :content="cartItemCount" color="white" overlap>
       <v-btn v-once class="checkout-fab" color="primary" dark fab bottom right @click="checkoutDialog = true">
         <v-icon>mdi-cart</v-icon>
       </v-btn>
-    </v-badge>
+    </v-badge> -->
 
     <!-- Checkout Dialog -->
-    <v-dialog v-show="checkoutDialog" v-model="checkoutDialog" fullscreen hide-overlay
+    <!-- <v-dialog v-show="checkoutDialog" v-model="checkoutDialog" fullscreen hide-overlay
       transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
@@ -36,7 +36,7 @@
           <CheckoutCart @move-to-delivery-module="moveToDelivery($event)" />
         </v-card-text>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
   </v-container>
 </template>
 
