@@ -6,9 +6,9 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
+      <!-- <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
         <Menu v-if="menuVisible" />
-      </v-col>
+      </v-col> -->
       <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="4">
         <div class="sticky-wrapper">
           <CheckoutCart v-if="checkoutCartVisible" @move-to-delivery-module="moveToDelivery($event)" />
@@ -16,14 +16,14 @@
       </v-col>
     </v-row>
     <!-- Floating Action Button for mobile view -->
-    <!-- <v-badge v-show="$vuetify.breakpoint.smAndDown" :content="cartItemCount" color="white" overlap>
+    <v-badge v-show="$vuetify.breakpoint.smAndDown" :content="cartItemCount" color="white" overlap>
       <v-btn v-once class="checkout-fab" color="primary" dark fab bottom right @click="checkoutDialog = true">
         <v-icon>mdi-cart</v-icon>
       </v-btn>
-    </v-badge> -->
+    </v-badge>
 
     <!-- Checkout Dialog -->
-    <!-- <v-dialog v-show="checkoutDialog" v-model="checkoutDialog" fullscreen hide-overlay
+    <v-dialog v-show="checkoutDialog" v-model="checkoutDialog" fullscreen hide-overlay
       transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
@@ -36,7 +36,7 @@
           <CheckoutCart @move-to-delivery-module="moveToDelivery($event)" />
         </v-card-text>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
   </v-container>
 </template>
 
@@ -69,7 +69,7 @@ export default {
   mounted() {
     // Load components after initial render
     this.$nextTick(() => {
-      this.menuVisible = true;
+      // this.menuVisible = true;
       this.checkoutCartVisible = true;
     });
   },
