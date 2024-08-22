@@ -1,6 +1,6 @@
 <template>
-  <v-container class="my-4">
-    <v-row v-once class="my-3">
+  <v-container v-once class="my-4">
+    <v-row class="my-3">
       <v-col cols="12" md="6" class="text-left">
         <h3 class="text-dark-grey font-40">Catering Menu</h3>
         <p class="text-dark-grey mt-5 font-20">* The minimum orders for catering is 250$</p>
