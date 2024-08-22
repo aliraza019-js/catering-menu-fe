@@ -6,9 +6,9 @@
       </v-col>
     </v-row>
     <v-row>
-      <!-- <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
+      <v-col :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12">
         <Menu v-if="menuVisible" />
-      </v-col> -->
+      </v-col>
       <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="4">
         <div class="sticky-wrapper">
           <CheckoutCart v-if="checkoutCartVisible" @move-to-delivery-module="moveToDelivery($event)" />
@@ -69,7 +69,7 @@ export default {
   mounted() {
     // Load components after initial render
     this.$nextTick(() => {
-      // this.menuVisible = true;
+      this.menuVisible = true;
       this.checkoutCartVisible = true;
     });
   },
