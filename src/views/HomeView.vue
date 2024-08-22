@@ -41,10 +41,11 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue'
 import Hero from "../components/Hero";
-import Menu from "../components/menu";
-import CheckoutCart from "@/components/CheckoutCart";
-// const Location = () => import("../components/Location");
+
+const Menu = defineAsyncComponent(() => import(/* webpackChunkName: "menu" */ "../components/menu"));
+const CheckoutCart = defineAsyncComponent(() => import(/* webpackChunkName: "checkout-cart" */ "@/components/CheckoutCart"));
 
 export default {
   name: "Home",

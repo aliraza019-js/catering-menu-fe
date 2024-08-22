@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+// import HomeView from "../views/HomeView.vue";
 import Success from "../views/Success.vue";
 import Cancel from "../views/Cancel.vue";
 import Checkout from "../views/checkout.vue";
@@ -12,7 +12,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () => import(/* webpackChunkName: "HomeView" */ '../views/HomeView.vue')
   },
   {
     path: "/success",
