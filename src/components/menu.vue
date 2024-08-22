@@ -31,9 +31,9 @@
           'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
         }" class="custom-card" outlined>
             <v-row>
-              <v-col cols="12" md="4">
+              <!-- <v-col cols="12" md="4">
                 <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
-              </v-col>
+              </v-col> -->
               <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
                 class="d-flex flex-column justify-center">
                 <v-card-title class="menu-title">{{ item.name }}</v-card-title>
@@ -63,9 +63,9 @@
           'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
         }" class="custom-card" outlined>
           <v-row>
-            <v-col cols="12" md="4">
+            <!-- <v-col cols="12" md="4">
               <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
-            </v-col>
+            </v-col> -->
             <v-col cols="12" md="8" :class="{ 'align-center': $vuetify.breakpoint.smAndDown }"
               class="d-flex flex-column justify-center">
               <v-card-title class="menu-title">{{ item.name }}</v-card-title>
