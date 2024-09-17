@@ -11,7 +11,8 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="!$vuetify.breakpoint.smAndDown && productsLoader && !items.length" class="h-100 d-flex" justify="center" align="center">
+    <v-row v-if="!$vuetify.breakpoint.smAndDown && productsLoader && !items.length" class="h-100 d-flex"
+      justify="center" align="center">
       <v-col cols="12" md="8" class="text-center">
         <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
         <h1 class="not-found-title">Loading Products...</h1>
@@ -162,7 +163,10 @@ export default {
   computed: {
     ...mapGetters(["cartItems"]),
     uniqueCategories() {
-      return [...new Set(this.filteredItems.map((item) => item.category))];
+      return [...new Set(this.uniqueItems.map((item) => item.category))];
+    },
+    uniqueItems() {
+      return _.uniqBy(this.items, 'id');
     },
     filteredItems() {
       if (this.selectedCategory === "Menu" && !this.searchMenu) {
@@ -180,7 +184,7 @@ export default {
       );
     },
     groupedItemsByCategory() {
-      return this.filteredItems.reduce((acc, item) => {
+      return this.uniqueItems.reduce((acc, item) => {
         if (!acc[item.category]) {
           acc[item.category] = [];
         }
