@@ -11,13 +11,6 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="productsLoader && !items.length" class="h-100 d-flex" justify="center" align="center">
-      <v-col cols="12" md="8" class="text-center">
-        <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
-        <h1 class="not-found-title">Loading Products...</h1>
-      </v-col>
-    </v-row>
-
     <v-row v-if="!productsLoader && !items.length" class="h-100 d-flex" justify="center" align="center">
       <v-col cols="12" md="8" class="text-center">
         <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
