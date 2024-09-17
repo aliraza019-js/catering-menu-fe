@@ -11,10 +11,17 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="productsLoader || !items.length" class="h-100 d-flex" justify="center" align="center">
+    <v-row v-if="productsLoader && !items.length" class="h-100 d-flex" justify="center" align="center">
       <v-col cols="12" md="8" class="text-center">
         <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
-        <h1 class="not-found-title">Not Found</h1>
+        <h1 class="not-found-title">Loading Products...</h1>
+      </v-col>
+    </v-row>
+
+    <v-row v-if="!productsLoader && !items.length" class="h-100 d-flex" justify="center" align="center">
+      <v-col cols="12" md="8" class="text-center">
+        <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
+        <h1 class="not-found-title">No Products Found</h1>
       </v-col>
     </v-row>
     <!-- Loop through grouped items by category -->
@@ -88,12 +95,19 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row v-if="loadingProducts" class="h-100 d-flex" justify="center" align="center">
+      <v-col cols="12" md="8" class="text-center">
+        <v-progress-circular indeterminate></v-progress-circular>
+        <p>Loading more products...</p>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import EventBus from "@/eventBus";
+import _ from "lodash"; // lodash for debouncing
+// import EventBus from "@/eventBus";
 
 export default {
   data() {
@@ -101,6 +115,7 @@ export default {
       searchMenu: "",
       selectedCategory: "Menu",
       productsLoader: false,
+      loadingProducts: false,
       categoriesWithoutCheckboxes: ["appetizers", "meats"],
       productsWithDzn: [
         "Grape Leaves",
@@ -139,6 +154,9 @@ export default {
         "Drinks",
       ],
       items: [],
+      currentPage: 1,
+      limit: 10,
+      hasMoreItems: true,
     };
   },
   computed: {
@@ -183,6 +201,44 @@ export default {
     ...mapActions(["addToCart", "increaseQuantity", "decreaseQuantity"]),
     performSearch() {
       console.log("Searching for:", this.searchMenu);
+    },
+    handleScroll: _.debounce(function () {
+      const bottomOfWindow = window.innerHeight + window.pageYOffset >= document.documentElement.offsetHeight - 200;
+      if (bottomOfWindow) {
+        this.loadMoreItems();
+      }
+    }, 300), // Debounce to limit excessive API calls
+    async loadMoreItems() {
+      if (!this.hasMoreItems || this.loadingProducts) return;
+
+      this.loadingProducts = true;
+      try {
+        const response = await fetch(
+          `https://backend.vcaterings.com/api/products?limit=${this.limit}&page=${this.currentPage}&search=${this.searchMenu}`
+        );
+
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const newItems = await response.json();
+        if (newItems.length === 0) {
+          this.hasMoreItems = false; // Stop further requests if no more items
+        } else {
+          this.items = [...this.items, ...newItems]; // Append new items
+          this.limit += 10;
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error.message);
+      } finally {
+        this.loadingProducts = false;
+        this.productsLoader = false;
+      }
+    },
+
+    resetPagination() {
+      this.items = [];
+      this.currentPage = 1;
+      this.hasMoreItems = true;
+      this.productsLoader = true; // Show loader when search resets
     },
     validateSelection(item, category) {
       if (!this.categoriesWithoutCheckboxes.includes(category) && !this.selectedPrice[item.id]) {
@@ -264,25 +320,16 @@ export default {
   },
 
   async created() {
-    this.productsLoader = true;
-    try {
-      const response = await fetch(
-        "https://backend.vcaterings.com/api/products?limit=100"
-      );
+    this.productsLoader = true; // Show initial loader
+    await this.loadMoreItems(); // Load first batch of items
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+    // Add scroll event listener
+    window.addEventListener("scroll", this.handleScroll);
+  },
 
-      const products = await response.json();
-      console.log("products", products);
-      this.items = products.reverse();
-    } catch (error) {
-      console.error("Error fetching products:", error.message || error);
-    } finally {
-      this.productsLoader = false;
-    }
-  }
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
 
 };
 </script>

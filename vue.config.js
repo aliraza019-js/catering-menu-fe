@@ -34,10 +34,12 @@ module.exports = defineConfig({
 
   devServer: {
     compress: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    }
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true
+      }
+    },
   },
 
   // PWA configuration (if you're using PWA features)

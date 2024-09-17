@@ -306,3 +306,169 @@ textarea {
         font-weight: 500 !important;
     }
 }
+
+
+// Menu Page CSS
+
+.custom-card {
+    border-radius: 24px !important;
+    border: 1px solid #f7f7f8 !important;
+    background: #fff !important;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.08) !important;
+    position: relative;
+  }
+  
+  .custom-card-with-checkboxes {
+    height: auto !important;
+  
+    @media (min-width: 960px) {
+      height: 250px !important;
+    }
+  }
+  
+  .custom-card-without-checkboxes {
+    height: auto !important;
+  
+    @media (min-width: 960px) {
+      height: 155px !important;
+    }
+  }
+  
+  .custom-image {
+    object-fit: contain !important;
+    border-radius: 8px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+    background-size: contain !important;
+  }
+  
+  .v-card.custom-card .v-card__title.menu-title {
+    font-weight: bold !important;
+    font-size: 20px !important;
+    font-family: poppins !important;
+    color: #2d2821 !important;
+  }
+  
+  .v-card.custom-card .v-card__subtitle.menu-price {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    font-family: poppins !important;
+    color: #2d2821 !important;
+  }
+  
+  .category-title {
+    font-size: 30px;
+    font-family: Poppins;
+    font-weight: 700;
+    color: #2d2821;
+  
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
+  }
+  
+  .category-filters {
+    margin-top: 20px;
+  }
+  
+  .category-filters .v-btn {
+    text-transform: none;
+    border-radius: 4px;
+    border: none;
+    background: var(--grey, #f7f7f8);
+  }
+  
+  .category-filters .active-category {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .not-found-icon {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 1rem;
+  }
+  
+  .not-found-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
+  }
+  
+  @media screen and (min-width: 600px) {
+    .overflow-x-auto {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  
+  .v-card {
+    width: 100%;
+  }
+  
+  .add-to-cart-btn.v-btn {
+    width: 150px !important;
+    height: 30px !important;
+    border-radius: 4px !important;
+  }
+  
+  .add-to-cart-btn.v-btn .v-btn__content {
+    color: white !important;
+    font-size: 12px !important;
+    text-transform: capitalize !important;
+  }
+  
+  .menu-radio-container.v-input--radio-group {
+    .v-input__control {
+      .v-messages {
+        display: none !important;
+      }
+    }
+  
+    .v-input__slot {
+      .v-input--radio-group__input {
+        @media (max-width: 600px) {
+          justify-content: center !important;
+        }
+      }
+    }
+  
+    margin-top: 0px !important;
+  
+    .v-radio.menu-radio-item {
+      background-color: #f9f9f9 !important;
+      padding: 2px;
+      height: 36px !important;
+      width: 121px !important;
+      margin-bottom: 4px !important;
+      border-radius: 4px !important;
+  
+      .v-label {
+        font-size: 14px !important;
+      }
+  
+      .v-input--selection-controls__input {
+        margin-right: 0px !important;
+  
+        .v-input--selection-controls__ripple {
+          display: none !important;
+        }
+  
+        .v-icon.mdi-radiobox-blank {
+          font-size: 14px !important;
+          color: #d9d9d9 !important;
+        }
+  
+        .v-icon.mdi-radiobox-marked {
+          font-size: 14px !important;
+          color: #fe734a !important;
+        }
+      }
+    }
+  }
