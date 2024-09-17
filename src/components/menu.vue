@@ -11,7 +11,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="!productsLoader && !items.length" class="h-100 d-flex" justify="center" align="center">
+    <v-row v-if="productsLoader && !items.length" class="h-100 d-flex" justify="center" align="center">
       <v-col cols="12" md="8" class="text-center">
         <v-img src="@/assets/not-found.webp" loading="lazy" class="not-found-icon mx-auto"></v-img>
         <h1 class="not-found-title">No Products Found</h1>
@@ -194,6 +194,8 @@ export default {
     ...mapActions(["addToCart", "increaseQuantity", "decreaseQuantity"]),
     performSearch() {
       console.log("Searching for:", this.searchMenu);
+      this.resetPagination(); // Reset items and pagination if search is performed
+      this.loadMoreItems(); // Fetch new items based on the search term
     },
     handleScroll: _.debounce(function () {
       const bottomOfWindow = window.innerHeight + window.pageYOffset >= document.documentElement.offsetHeight - 200;
