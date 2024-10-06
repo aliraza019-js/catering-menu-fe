@@ -35,9 +35,9 @@
       <div v-if="$vuetify.breakpoint.smAndDown" :class="{ 'd-flex overflow-x-auto': $vuetify.breakpoint.smAndDown }">
         <v-col cols="12" md="6" v-for="item in items" :key="item.name" class="px-2">
           <v-card :class="{
-          'custom-card-with-checkboxes': !categoriesWithoutCheckboxes.includes(category),
-          'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
-        }" class="custom-card" outlined>
+            'custom-card-with-checkboxes': !categoriesWithoutCheckboxes.includes(category),
+            'custom-card-without-checkboxes': categoriesWithoutCheckboxes.includes(category),
+          }" class="custom-card" outlined>
             <v-row>
               <v-col cols="12" md="4">
                 <v-img :src="item.image" class="custom-image" loading="lazy" contain></v-img>
@@ -47,7 +47,7 @@
                 <v-card-title class="menu-title">{{ item.name }}</v-card-title>
                 <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
                   ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
-          formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
+                    formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
                 </v-card-subtitle>
                 <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
                   <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"
@@ -79,7 +79,7 @@
               <v-card-title class="menu-title">{{ item.name }}</v-card-title>
               <v-card-subtitle v-if="categoriesWithoutCheckboxes.includes(category)" class="menu-price py-1">
                 ${{ shouldDisplayDzn(item) ? formatPrice(item.price) + "/Dzn" : shouldDisplayWithKabab(item) ?
-          formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
+                  formatPrice(item.price) + '/6pcs Kabob' : formatPrice(item.price) }}
               </v-card-subtitle>
               <v-radio-group v-else v-model="selectedPrice[item?.id]" class="menu-radio-container flex-wrap ml-2" row>
                 <v-radio v-for="(priceOption, index) in prices" :key="index" class="menu-radio-item"
@@ -158,6 +158,8 @@ export default {
       currentPage: 1,
       limit: 10,
       hasMoreItems: true,
+      previousItemCount: 0,
+      allProductsLoaded: false,
     };
   },
   computed: {
@@ -215,7 +217,7 @@ export default {
       }
     }, 300), // Debounce to limit excessive API calls
     async loadMoreItems() {
-      if (!this.hasMoreItems || this.loadingProducts) return;
+      if (!this.hasMoreItems || this.loadingProducts || this.allProductsLoaded) return;
 
       this.loadingProducts = true;
       try {
@@ -226,11 +228,21 @@ export default {
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const newItems = await response.json();
-        if (newItems.length === 0) {
-          this.hasMoreItems = false; // Stop further requests if no more items
+        console.log('newItems', newItems)
+        // if (newItems.length === 0) {
+        //   this.hasMoreItems = false; // Stop further requests if no more items
+        //   this.loadingProducts = false;
+        // } else {
+        //   this.items = [...this.items, ...newItems]; // Append new items
+        //   this.limit += 10;
+        // }
+        if (newItems.length === 0 || newItems.length === this.previousItemCount) {
+          this.hasMoreItems = false;
+          this.allProductsLoaded = true; // Set this flag when all products are loaded
         } else {
           this.items = [...this.items, ...newItems]; // Append new items
           this.limit += 10;
+          this.previousItemCount = newItems.length;
         }
       } catch (error) {
         console.error("Error fetching products:", error.message);
