@@ -27,13 +27,13 @@
                     </v-btn>
                   </div>
                   <p class="item-price">{{ item.canShowProductsWithChecboxes ? `${item.size}″ - $${item.price}` :
-      `$${item.price} / ${item.weight}` }}</p>
+                    `$${item.price} / ${item.weight}` }}</p>
                   <div class="quantity-control d-flex align-center">
                     <v-btn icon @click="
-      item.quantity === 1
-        ? removeItem(item.id)
-        : decreaseQuantity(item.id)
-      ">
+                      item.quantity === 1
+                        ? removeItem(item.id)
+                        : decreaseQuantity(item.id)
+                      ">
                       <v-icon>mdi-minus</v-icon>
                     </v-btn>
                     <span class="mx-2">{{ item.quantity }}</span>
@@ -69,14 +69,8 @@
                 {{ option.percentage > 0 ? option.percentage + '%' : 'Other' }}
               </v-btn>
             </div>
-            <v-text-field
-              v-if="selectedTip === 0"
-              v-model.number="customTipAmount"
-              label="Enter custom tip amount"
-              type="number"
-              min="0"
-              class="mt-2"
-            ></v-text-field>
+            <v-text-field v-if="selectedTip === 0" v-model.number="customTipAmount" label="Enter custom tip amount"
+              type="number" min="0" class="mt-2"></v-text-field>
           </v-col>
           <v-col cols="12" class="mt-4 pa-0">
             <h2 class="my-2">Tax Exempt</h2>
@@ -214,12 +208,10 @@ export default {
       // Implement cart closing logic
     },
     formatPrice(item) {
-      console.log('item formatPrice', item)
       return `${item.size} - $${item.price.toFixed(2)}`;
       // return price;
     },
     selectTip(percentage) {
-      console.log('percentage', percentage)
       this.selectedTip = percentage;
     },
     selectTaxExempt(value) {
@@ -250,13 +242,15 @@ export default {
       }
     },
     goToCheckout() {
-      console.log('tipAmount', this.tipAmount)
       let checkoutData = {
         cartItems: this.cartItems,
         tipAmount: this.tipAmount,
         tax: this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax,
       }
-      this.$router.push({ name: 'Checkout', params: { checkoutData: checkoutData } })
+      if (this.$route.name !== 'Checkout') {
+        this.$router.push({ name: 'Checkout', params: { checkoutData: checkoutData } });
+      }
+      this.$emit('tip-emitted',this.tipAmount);
       this.$emit('move-to-delivery-module', checkoutData)
     },
   },

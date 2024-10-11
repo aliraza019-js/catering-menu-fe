@@ -36,7 +36,7 @@
     <!-- Subsections in Delivery or Pickup -->
     <div v-if="isPickupActive || isDeliveryActive">
       <!-- Location -->
-      <Location @active-location="activeLocation($event)" />
+      <Location @active-location="activeLocation($event)" v-if="isPickupActive"  />
       <Guests @number-of-guests="getNumberOfGuests($event)" />
       <PickupForm @pickup-form-data="handlePickupFormData($event)" v-if="isPickupActive" />
       <DeliveryForm @delivery-form-data="handleDeliveryFormData($event)" v-if="isDeliveryActive" />
@@ -194,11 +194,40 @@ export default {
         });
       }
     },
+
     async orderNow() {
       this.loader = true;
       const stripe = await loadStripe(
         "pk_live_51ONQenBDz9FsjJ0OwKgMxvMN3CNFHXVaKprYcAMeUOpZ8qZwqOCWsgXVmIPJqAHdbZpzZM6utUlLVDKQp58saieA00tgVPvMUJ"
       );
+      const orderDetails = {
+        items: this.cartItems,
+        tip: this.totalAmountData.tipAmount,
+        tax: this.totalAmountData.tax,
+        numberOfGuests: this.isPickupActive
+          ? this.pickupFormInformation.noOfGuests
+          : this.deliveryFormInformation.noOfGuests,
+        deliveryMethod: this.isDeliveryActive ? 'delivery' : 'pickup',
+        deliveryDetails: this.isDeliveryActive
+          ? { ...this.deliveryFormInformation.deliveryFormData, deliveryTime: this.deliveryFormInformation.time }
+          : null,
+        pickupDetails: this.isPickupActive
+          ? { ...this.pickupFormInformation.pickupFormData, pickupTime: this.pickupFormInformation.time }
+          : null,
+      };
+
+      try {
+        const response = await fetch("http://localhost:3002/api/orders/save-order", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderDetails),
+        });
+        const result = await response.json();
+      } catch (error) {
+        console.error("Order saving error:", error);
+      }
 
       // Create the checkout session on your backend
       const response = await fetch(
