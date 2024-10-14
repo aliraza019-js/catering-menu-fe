@@ -156,7 +156,7 @@ export default {
       ],
       items: [],
       currentPage: 1,
-      limit: 10,
+      limit: 3,
       hasMoreItems: true,
       previousItemCount: 0,
       allProductsLoaded: false,
