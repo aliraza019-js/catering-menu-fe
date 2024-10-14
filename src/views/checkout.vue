@@ -19,7 +19,7 @@
                 <DeliveryModule :totalAmountData="deliveryTotalData"/>
             </v-col>
             <v-col cols="12" md="4">
-                <orderCheckout />
+                <orderCheckout @tip-emitted="getTipData($event)" />
             </v-col>
         </v-row>
     </v-container>
@@ -36,17 +36,19 @@ export default {
     },
     data(){
         return{
-            deliveryTotalData: {}
+            deliveryTotalData: {},
         }
     },
     methods: {
         goBack() {
             this.$router.push("/");
+        },
+        getTipData($event){
+            this.deliveryTotalData.tipAmount = $event
         }
     },
     mounted(){
         this.deliveryTotalData = this.$route.params.checkoutData
-        console.log('this.$route.params', this.$route.params)
     }
 };
 </script>

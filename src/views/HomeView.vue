@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     moveToDelivery(data) {
+      console.log('data in passing moduleee',data)
       window.scrollTo({
         top: document.getElementById("delivery-module").offsetTop,
         left: 0,

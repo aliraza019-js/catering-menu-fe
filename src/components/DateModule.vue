@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     handleDataAndTime(date, time) {
-      console.log('handleDataAndTime', date, time);
       let dateAndTime = {
         date: date,
         time: time

@@ -109,7 +109,6 @@ export default {
     cartItems : {
       deep: true,
       handler(cartItem) {
-        console.log('cartItem', cartItem.length)
         if(cartItem.length >= 3){
           EventBus.$emit('show-snackbar', {
           message: `Please Scroll down to see more products`,
@@ -125,7 +124,6 @@ export default {
       // Implement cart closing logic
     },
     formatPrice(item) {
-      console.log('item formatPrice', item)
       return `${item.size} - $${item.price.toFixed(2)}`;
       // return price;
     },
@@ -162,7 +160,6 @@ export default {
         tipAmount: this.tipAmount,
         tax: this.taxExempt && this.taxExemptFormUploaded ? 0 : this.tax,
       }
-      console.log('totalAmountData', this.tipAmount)
       this.$router.push({name: 'Checkout', params: {checkoutData: checkoutData}})
       this.$emit('move-to-delivery-module', checkoutData)
     },
