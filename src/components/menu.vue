@@ -32,7 +32,7 @@
       </v-col>
 
       <!-- Horizontal scroll for items in each category on mobile view -->
-      <div v-if="$vuetify.breakpoint.smAndDown" :class="{ 'd-flex overflow-x-hidden': $vuetify.breakpoint.smAndDown && items.length >= 5 }">
+      <div v-if="$vuetify.breakpoint.smAndDown" :class="{ 'd-flex overflow-x-auto': $vuetify.breakpoint.smAndDown && items.length >= 5 }">
         <v-col cols="12" md="6" v-for="item in items" :key="item.name" class="px-2">
           <v-card :class="{
             'custom-card-with-checkboxes': !categoriesWithoutCheckboxes.includes(category),
