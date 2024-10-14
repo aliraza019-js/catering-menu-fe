@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!$vuetify.breakpoint.smAndDown" class="hero-container" fluid>
+  <v-container class="hero-container" fluid>
     <v-row>
       <v-col cols="12" md="6"
         :class="{ 'pt-16 mt-16': !$vuetify.breakpoint.smAndDown, 'pt-8 mt-8': $vuetify.breakpoint.smAndDown }">
@@ -32,7 +32,6 @@
   height: 625px;
 
   @media (max-width: 600px) {
-    background: url(../assets/banner/herobgMobile.webp) no-repeat center center;
     height: 250px;
   }
 }
