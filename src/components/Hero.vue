@@ -1,7 +1,8 @@
 <template>
   <v-container class="hero-container" fluid>
     <v-row>
-      <v-col cols="12" md="6" class="pt-16 mt-16">
+      <v-col cols="12" md="6"
+        :class="{ 'pt-16 mt-16': !$vuetify.breakpoint.smAndDown, 'pt-8 mt-8': $vuetify.breakpoint.smAndDown }">
         <div class="mx-10">
           <h1 class="hero-title">Serving Fresh Mediterranean Flavors</h1>
         </div>
@@ -46,7 +47,7 @@
   z-index: 1;
 }
 
-.hero-container > * {
+.hero-container>* {
   position: relative;
   z-index: 2;
 }
