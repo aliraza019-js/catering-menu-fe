@@ -20,7 +20,7 @@
 
   @media (max-width: 600px) {
     font-size: 30px !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
   }
 }
 
@@ -31,7 +31,7 @@
   height: 625px;
 
   @media (max-width: 600px) {
-    height: 300px;
+    height: 250px;
   }
 }
 
