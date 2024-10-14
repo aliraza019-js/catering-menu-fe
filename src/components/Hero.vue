@@ -32,6 +32,7 @@
   height: 625px;
 
   @media (max-width: 600px) {
+    background: url(../assets/banner/herobgMobile.webp) no-repeat center center;
     height: 250px;
   }
 }
